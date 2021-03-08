@@ -1,6 +1,6 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <HelloWorld :msg="message" @click="show()"/>
 </template>
 
 <script>
@@ -8,6 +8,16 @@ import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
+  data(){
+    return {
+      message: 'Marswiz is awesome.'
+    };
+  },
+  methods: {
+    show(){
+      this.message = this.message=='hahahah!'?'Marswiz is awesome.':'hahahah!';
+    },
+  },
   components: {
     HelloWorld
   }
