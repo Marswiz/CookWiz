@@ -4,7 +4,7 @@
     <p v-if="isEmpty" style="color: #a1a1a1;">No Recipes.</p>
     <div v-for="recipe in recipes" :key="recipe.engName">
         <a id="recipeItem">
-          <p id="recipeChName"><i class="fa fa-map-pin"></i> {{recipe.chName}} </p>
+          <p id="recipeChName"><i class="fa fa-leaf"></i> {{recipe.chName}} </p>
           <p id="recipeEngName">  {{recipe.engName}} </p>
         </a>
     </div>
@@ -34,7 +34,7 @@ export default {
   }
   #recipeItem {
     display: block;
-    margin: 1em 0;
+    margin: 1.4em 0;
     text-decoration: none;
     color: #a1a1a1;
     &:hover {

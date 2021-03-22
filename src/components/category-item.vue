@@ -41,10 +41,10 @@ export default {
 // Define the animation duration time of all animation effects.
 $animationTime: 0.3s;
 
- a {
+ #catagoryItem {
    text-decoration: none;
    color: black;
-   padding: 1em 0;
+   margin: 1em 0;
  }
 
  p {
