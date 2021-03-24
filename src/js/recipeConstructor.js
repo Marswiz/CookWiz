@@ -1,16 +1,27 @@
 class Recipe{
     constructor({
-                    chName = '菜品名称',
-                    engName = 'dish_name',
-                    time = 0,
-                    category = 'MC',
-                    serve = 1,
-                    tags = ['tag'],
-                    rating = 5,
-                    ingredient = [{food: 'food', weight: 0}],
-                    process = ['process'],
-                    tips = ['tips'],
-                }){
+                    chName,
+                    engName ,
+                    time,
+                    category ,
+                    serve ,
+                    tags,
+                    rating ,
+                    ingredient,
+                    process,
+                    tips,
+                } = {
+                      chName:'菜品名称',
+                      engName: 'dish_name',
+                      time: 0,
+                      category: 'MC',
+                      serve: 1,
+                      tags: ['tag'],
+                      rating: 5,
+                      ingredient: [{food: 'food', weight: 0}],
+                      process: ['process'],
+                      tips: ['tips'],
+    }){
         this.chName = chName;
         this.engName = engName;
         this.time = time;

@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import { createWebHashHistory,createRouter } from 'vue-router';
+import { createWebHashHistory, createRouter } from 'vue-router';
 import App from './App.vue';
 import mainPage from './components/main-page.vue';
 import recipePage from './components/recipe-page.vue';
@@ -18,9 +18,9 @@ let routes = [
 // Create Vue-Router instance.
 let router = createRouter({
     history: createWebHashHistory(),
-    routes,
+    routes
 });
 
 let app = createApp(App);
 app.use(router);
-app.mount('#app')
+app.mount('#app');
