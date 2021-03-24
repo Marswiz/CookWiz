@@ -1,14 +1,16 @@
 <template>
-  <a id="catagoryItem" @click="shown = !shown">
-    <p id="categoryNameChinese">
-      {{chineseName}}<span v-if="shown" class="flag">-</span>
-      <span v-else class="flag">+</span>
-    </p>
-    <p id="categoryNameEnglish"> {{englishName}} </p>
-  </a>
-  <transition name="recipe">
-    <recipe-items v-if="shown" :recipes="recipes"></recipe-items>
-  </transition>
+  <div id="catagory-item-box">
+    <a id="catagoryItem" @click="shown = !shown">
+      <p id="categoryNameChinese">
+        {{chineseName}}<span v-if="shown" class="flag">-</span>
+        <span v-else class="flag">+</span>
+      </p>
+      <p id="categoryNameEnglish"> {{englishName}} </p>
+    </a>
+    <transition name="recipe">
+      <recipe-items v-if="shown" :recipes="recipes"></recipe-items>
+    </transition>
+  </div>
 </template>
 
 <script>
@@ -40,11 +42,12 @@ export default {
 
 // Define the animation duration time of all animation effects.
 $animationTime: 0.3s;
-
+ #catagory-item-box{
+   margin: 1.4em 0;
+ }
  #catagoryItem {
    text-decoration: none;
    color: black;
-   margin: 1em 0;
  }
 
  p {
@@ -69,9 +72,7 @@ $animationTime: 0.3s;
    padding-top: .2em;
  }
 
- body {
-   margin: 30px;
- }
+
 
  @keyframes recipe-in {
    0% {

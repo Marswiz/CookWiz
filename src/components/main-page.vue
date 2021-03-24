@@ -1,8 +1,10 @@
 <template>
+  <div id="main-page-box">
     <h1 id="header">MENU</h1>
     <category-item v-for="category in categories" :key="category.engName"
                    :chinese-name="category.chName" :english-name="category.engName"
     :recipes="category.recipes"></category-item>
+  </div>
 </template>
 
 <script>
@@ -58,14 +60,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 @media screen and (max-width: 700px) {
-
-  body {
-    margin: 0;
-    padding: 0;
-  }
 
   #header {
     padding: 1em 0;
@@ -75,14 +72,9 @@ export default {
     font-size: 2.4em;
   }
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-content: center;
-    align-items: center;
-    padding-left: 4em;
+  #main-page-box{
+    margin-left: 4em;
   }
-
 }
 
 </style>

@@ -30,20 +30,11 @@ export default {
     padding: 0;
   }
 
-  #header {
-    padding: 1em 0;
-    font-family: 'High Tower Text', serif;
-    letter-spacing: 3px;
-    font-weight: normal;
-    font-size: 2.4em;
-  }
-
   #app {
     display: grid;
     grid-template-columns: 1fr;
     justify-content: center;
     align-items: center;
-    padding-left: 4em;
   }
 
 }
