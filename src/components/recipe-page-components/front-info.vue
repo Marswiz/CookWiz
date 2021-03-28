@@ -10,7 +10,7 @@
     <div id="tag-box">
       <front-info-tag icon-name="tag" tag-info="意大利菜 辛辣 咸鲜"></front-info-tag>
     </div>
-    <rating-component :rating="1.7556"></rating-component>
+    <rating-component :rating="4.4"></rating-component>
     <nutrition-component></nutrition-component>
   </div>
 </template>
@@ -37,6 +37,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
     #recipe-title {
       font-family: '华光大标宋_CNKI';
       color: $main-color;
@@ -46,6 +47,7 @@ export default {
     time {
       font-family: 'TodaySB-Caps';
       margin-bottom: 1em;
+      color: $gray;
     }
     #info-box{
       display: flex;
@@ -54,7 +56,7 @@ export default {
     }
     #tag-box{
       align-self: stretch;
-      margin-top: 0.5em;
+      margin-top: 0.1em;
     }
   }
 

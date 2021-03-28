@@ -4,6 +4,7 @@
     <ingredient-component></ingredient-component>
     <process-component></process-component>
     <tips-component></tips-component>
+    <div id="feedbackBox"> feedback box to be written.</div>
   </div>
 </template>
 
@@ -29,10 +30,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
  #recipe-page-box {
    display: flex;
    flex-direction: column;
    align-items: center;
+   padding: 0 1.5em;
+ }
+ h2{
+   font-weight: normal;
+   font-family: 'TodaySB-Caps', sans-serif;
+   font-size: 1.2em;
+ }
+ #feedbackBox{
+   height: 100px;
+   width: 100%;
+   border: 2px dashed tomato;
+   margin: 1em 0;
  }
 </style>

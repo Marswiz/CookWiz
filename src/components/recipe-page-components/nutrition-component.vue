@@ -1,9 +1,9 @@
 <template>
   <div id="nutrition">
-    <p>热量：{{calories}}g</p>
-    <p>蛋白质：{{protein}}g</p>
-    <p>碳水：{{sugar}}g</p>
-    <p>脂肪：{{fat}}g</p>
+    <p><span class="item">热量：</span>{{calories}}g</p>
+    <p><span class="item">蛋白质：</span>{{protein}}g</p>
+    <p><span class="item">碳水：</span>{{sugar}}g</p>
+    <p><span class="item">脂肪：</span>{{fat}}g</p>
   </div>
 </template>
 
@@ -25,7 +25,11 @@ export default {
 #nutrition {
   display: grid;
   height: 3em;
+  width: 100%;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
+}
+.item {
+  font-weight: bold;
 }
 </style>

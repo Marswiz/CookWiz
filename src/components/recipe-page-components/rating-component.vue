@@ -1,6 +1,6 @@
 <template>
   <div id="rating">
-    <span v-for="(rate,index) in ratingStars" :class="rate" :key="index"></span>
+    <span id="stars" v-for="(rate,index) in ratingStars" :class="rate" :key="index"></span>
   </div>
 </template>
 
@@ -13,8 +13,17 @@ export default {
   computed:{
     ratingStars(){
       let res = [];
-      for(let i=0; i<Math.floor(this.rating); i++){
-        res.push('fa fa-star');
+      let baseNum = Math.floor(this.rating);
+      if (baseNum <= 5 && baseNum >= 0){
+        for(let i=0; i<baseNum; i++){
+          res.push('fa fa-star');
+        }
+      } else if(baseNum > 5) {
+        for(let i=0; i<5; i++){
+          res.push('fa fa-star');
+        }
+      } else {
+        throw Error('The rating of this recipe is lower than 0, please recheck and modify it.');
       }
       let remain = this.rating - Math.floor(this.rating);
       if (remain > 0.75){
@@ -29,5 +38,12 @@ export default {
 </script>
 
 <style scoped>
-
+ #rating {
+   margin: 1em 0;
+   color: #ef8781;
+ }
+ #stars {
+   margin: 0 0.2em;
+   text-shadow: 0 0 4px #a1a1a1;
+ }
 </style>
