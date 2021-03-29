@@ -1,8 +1,7 @@
 <template>
   <div id="addRecipePageBox">
-    <form action="submit" id="totalForm">
       <fieldset>
-      <legend> 菜谱提交表 </legend>
+      <legend> Recipe Submit Tools </legend>
       <div id="item">
        <label for="chName">中文名：</label><input type="text" id="chName" v-model="recipe.chName">
       </div>
@@ -35,24 +34,26 @@
 <!-- 配料设置 -->
       <div id="item">
         <label>配料：</label>
-        <add-recipe-ingredient-component></add-recipe-ingredient-component>
+        <add-recipe-ingredient-component @loadIngredient="loadIngredient"></add-recipe-ingredient-component>
       </div>
 <!--  制作流程      -->
       <div id="item">
-        <label for="process">流程：</label><input type="text" id="process">
+        <label>流程：</label>
+        <add-recipe-process-tip-component :type="'process'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
 <!--   技巧提示     -->
       <div id="item">
-        <label for="tips">技巧提示：</label><input type="text" id="tips">
+        <label>技巧提示：</label>
+        <add-recipe-process-tip-component :type="'tags'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
       </fieldset>
-    </form>
   </div>
 </template>
 
 <script>
 import {Recipe} from '../js/recipeConstructor.js';
 import addRecipeIngredientComponent from './add-recipe-page-components/add-recipe-ingredient-component.vue';
+import addRecipeProcessTipComponent from './add-recipe-page-components/add-recipe-process-tip-component.vue';
 
 export default {
   name: "recipe-page",
@@ -82,7 +83,15 @@ export default {
     showChange(){
       console.log(this.recipe);
     },
-
+    // 用于从子组件add-recipe-ingredient-component接收参数并更新到recipe.ingredient
+    loadIngredient(ingredient){
+      this.recipe.ingredient = ingredient;
+    },
+    // 用于从子组件接收process或tip
+    loadItems(items){
+      this.recipe[items.type] = items.content;
+      console.log(this.recipe[items.type]);
+    },
   },
   computed: {
     tags(){
@@ -100,6 +109,7 @@ export default {
   },
   components:{
     addRecipeIngredientComponent,
+    addRecipeProcessTipComponent
   },
 }
 </script>
@@ -109,9 +119,6 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  #totalForm{
-
   }
   #item{
     margin: 0.5em 0;
