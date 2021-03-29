@@ -3,6 +3,7 @@ import { createWebHashHistory, createRouter } from 'vue-router';
 import App from './App.vue';
 import mainPage from './components/main-page.vue';
 import recipePage from './components/recipe-page.vue';
+import addRecipePage from './components/add-recipe-page.vue';
 
 let routes = [
     {
@@ -12,6 +13,10 @@ let routes = [
     {
         path: '/recipe',
         component: recipePage,
+    },
+    {
+        path: '/add-recipe',
+        component: addRecipePage,
     },
 ];
 

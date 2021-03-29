@@ -1,7 +1,8 @@
 <template>
   <p>
-    <router-link to="/">Main Page</router-link>
-    <router-link to="/recipe">Recipe</router-link>
+    <router-link to="/">Main Page </router-link>
+    <router-link to="/recipe">Recipe </router-link>
+    <router-link to="/add-recipe">addRecipe </router-link>
   </p>
   <router-view></router-view>
 </template>
