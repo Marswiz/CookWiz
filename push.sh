@@ -5,6 +5,6 @@ while [ -z $commitInfo ]
 done
 
 git add .
-git commit -m commitInfo
+git commit -m $commitInfo
 git push origin master
 echo 'Completely Finished.'
