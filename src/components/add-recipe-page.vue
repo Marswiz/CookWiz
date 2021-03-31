@@ -44,9 +44,10 @@
 <!--   技巧提示     -->
       <div id="item">
         <label>技巧提示：</label>
-        <add-recipe-process-tip-component :type="'tags'" @loadItems="loadItems"></add-recipe-process-tip-component>
+        <add-recipe-process-tip-component :type="'tips'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
       </fieldset>
+      <button id="submit" @click="submit">Submit</button>
   </div>
 </template>
 
@@ -91,6 +92,9 @@ export default {
     loadItems(items){
       this.recipe[items.type] = items.content;
       console.log(this.recipe[items.type]);
+    },
+    submit(){
+      console.log(this.recipe);
     },
   },
   computed: {

@@ -16,6 +16,9 @@ import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
 
 export default {
+  setup(){
+    
+  },
   name: "recipe-page",
   beforeRouteEnter(){
     let recipe = new Recipe();
