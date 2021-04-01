@@ -1,27 +1,29 @@
 <template>
     <h2>Ingredient</h2>
-    <div id="ingredient-box">
+    <div id="ingredient-box" @click="show()">
       {{ ingredientString }}
     </div>
 </template>
 
 <script>
-  import {ref,reactive} from 'vue';
-
   export default {
     name: "ingredient-component",
-    setup(props){
-      let ingredient = reactive(props.ingredient);
-      let ingredientString = '';
-      for (let i of ingredient){
-        ingredientString = ingredientString.concat(i.food+' ');
-        ingredientString = ingredientString.concat(i.weight);
-        ingredientString = ingredientString.concat(';');
-      }
-
-      return {
-        ingredientString: ref(ingredientString),
-      };
+    computed:{
+      ingredientString(){
+        let res = '';
+        for (let i = 0; i < this.ingredient.length; i++){
+          res += this.ingredient[i].food;
+          res += ' ';
+          res += this.ingredient[i].weight;
+          res += ' ';
+        }
+        return res;
+      },
+    },
+    methods:{
+      show(){
+        console.log(this.ingredient);
+      },
     },
     props: [
         'ingredient'

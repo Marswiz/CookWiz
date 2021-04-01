@@ -9,16 +9,9 @@
 </template>
 
 <script>
-import {reactive} from 'vue';
 
 export default {
   name: "process-component",
-  setup(props){
-    let recipeProcess = reactive(props.process);
-    return {
-      recipeProcess,
-    };
-  },
   props:[
       'process',
   ],

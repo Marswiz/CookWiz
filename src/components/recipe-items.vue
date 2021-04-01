@@ -2,17 +2,21 @@
   <div id="recipes">
     <p v-if="isEmpty" style="color: #a1a1a1;margin-top: 1.2em;">暂无菜谱</p>
     <p v-if="isEmpty" style="color: #a1a1a1;">No Recipes.</p>
-    <div v-for="recipe in recipes" :key="recipe.engName">
-        <a id="recipeItem" @click="routeRecipe(recipe.chName)">
+    <router-link :to="'/recipe/'+recipe.id" v-for="recipe in recipes" :key="recipe.engName">
+        <a id="recipeItem">
           <p id="recipeChName"><i class="fa fa-leaf"></i> {{recipe.chName}} </p>
           <p id="recipeEngName">  {{recipe.engName}} </p>
         </a>
-    </div>
+    </router-link>
   </div>
 </template>
 
 <script>
 export default {
+  setup(){
+    return {
+    };
+  },
   props: {
     recipes: Array,
   },
@@ -33,6 +37,9 @@ export default {
 <style lang="scss" scoped>
   p {
     font-size: 1em;
+  }
+  a {
+    text-decoration: none;
   }
   .recipes {
     height: 0;

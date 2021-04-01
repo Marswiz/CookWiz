@@ -27,11 +27,6 @@ export default {
     englishName: String,
     recipes: Array,
   },
-  computed: {
-
-  },
-  methods: {
-  },
   components: {
     recipeItems,
   },

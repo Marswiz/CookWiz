@@ -52,10 +52,10 @@ export default {
     // 从leancloud加载所有菜谱并添加中文、英文名到categories。
     getAllRecipes().then(res => {
       for (let i of res){
-        console.log(i);
         let item = {
           chName: i.chName,
           engName: i.engName,
+          id: i.objectId,
         };
         for (let category of categories){
           if (category.name == i.category){

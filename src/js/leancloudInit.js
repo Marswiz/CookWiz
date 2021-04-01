@@ -21,8 +21,17 @@ async function getRecipeFromName(name){
   return res[0].toJSON();
 }
 
+// 按objectId获取菜谱函数
+async function getRecipeFromId(id){
+  const queryRecipes = new AV.Query('Recipes');
+  queryRecipes.equalTo('objectId', id);
+  let res = await queryRecipes.find();
+  return res[0].toJSON();
+}
+
 export {
   AV,
   getRecipeFromName,
   getAllRecipes,
+  getRecipeFromId,
 };

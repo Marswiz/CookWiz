@@ -11,7 +11,7 @@ let routes = [
         component: mainPage,
     },
     {
-        path: '/recipe',
+        path: '/recipe/:id',
         component: recipePage,
     },
     {
@@ -23,7 +23,7 @@ let routes = [
 // Create Vue-Router instance.
 let router = createRouter({
     history: createWebHashHistory(),
-    routes
+    routes,
 });
 
 let app = createApp(App);
