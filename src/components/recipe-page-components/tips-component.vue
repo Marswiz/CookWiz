@@ -8,13 +8,19 @@
 </template>
 
 <script>
+import {reactive} from 'vue';
+
 export default {
   name: "tips-component",
-  data(){
+  setup(props){
+    let recipeTips = reactive(props.tips);
     return {
-      tips: ['动作要快rl三方了时代峻峰考了多少分聚少离多三段论开发的说了句','姿势要帅'],
+      recipeTips,
     };
-  }
+  },
+  props:[
+      'tips',
+  ],
 }
 </script>
 

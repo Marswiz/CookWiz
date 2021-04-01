@@ -9,27 +9,19 @@
 </template>
 
 <script>
+import {reactive} from 'vue';
+
 export default {
   name: "process-component",
-  data(){
+  setup(props){
+    let recipeProcess = reactive(props.process);
     return {
-      process: [
-          '把冰箱门打开  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aut autem ducimus esse fugiat ipsum iste, itaque magnam, obcaecati officia, omnis perspiciatis quas qui sequi similique soluta voluptates voluptatibus voluptatum.',
-          '把大象塞进去',
-          '把冰箱门带上',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-        '把大象塞进去',
-      ],
+      recipeProcess,
     };
   },
+  props:[
+      'process',
+  ],
   computed:{
     itemIndex(){
       let res = [];
@@ -68,6 +60,7 @@ h2 {
   letter-spacing: .15em;
 }
  #process-box{
+   align-self: flex-start;
    word-break: break-all;
    font-family: '华文仿宋',Serif;
    color: #757475;
@@ -83,7 +76,7 @@ h2 {
  }
  #index{
    padding-top: .08em;
-   flex: 1.4;
+   width: 30px;
    font-family: Helvetica,sans-serif;
    color: #ef8781;
    font-size: 1em;

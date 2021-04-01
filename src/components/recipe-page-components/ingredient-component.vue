@@ -1,16 +1,32 @@
 <template>
     <h2>Ingredient</h2>
     <div id="ingredient-box">
-      鸡大腿1个、葱20g、姜20g
-      、盐1小勺、鱼露1大勺、花雕酒1大勺
-      、清水1.5L、冰块适量
+      {{ ingredientString }}
     </div>
 </template>
 
 <script>
-export default {
-  name: "ingredient-component"
-}
+  import {ref,reactive} from 'vue';
+
+  export default {
+    name: "ingredient-component",
+    setup(props){
+      let ingredient = reactive(props.ingredient);
+      let ingredientString = '';
+      for (let i of ingredient){
+        ingredientString = ingredientString.concat(i.food+' ');
+        ingredientString = ingredientString.concat(i.weight);
+        ingredientString = ingredientString.concat(';');
+      }
+
+      return {
+        ingredientString: ref(ingredientString),
+      };
+    },
+    props: [
+        'ingredient'
+    ],
+  }
 </script>
 
 <style scoped>

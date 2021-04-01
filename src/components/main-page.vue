@@ -8,52 +8,69 @@
 </template>
 
 <script>
+import {reactive} from 'vue';
 import categoryItem from './category-item.vue';
+import {getAllRecipes} from "@/js/leancloudInit";
 
 export default {
   name: 'main-page',
-  data(){
-    return {
-      categories: [
+  setup(){
+    let categories = reactive(
+        [
           {
-          chName: "开胃菜",
-          engName: "Appetizers",
-          recipes: [{
-            chName: '烩小牛胸腺',
-            engName: 'Braised Sweetbread of Calf ',
-          },{
-            chName: '杭椒牛柳',
-            engName: 'Sauteed Beef Fillet with Hot Green Pepper',
-          },]
-        },
-        {
-          chName: "主菜",
-          engName: "Main Course",
-        },
-        {
-          chName: "甜品",
-          engName: "Desserts",
-        },
-        {
-          chName: "饮品",
-          engName: "Drinks",
-          recipes: [{
-            chName: '烩小牛胸腺',
-            engName: 'Braised Sweetbread of Calf ',
-          },{
-            chName: '杭椒牛柳',
-            engName: 'Sauteed Beef Fillet with Hot Green Pepper',
-          },]
-        },
-        {
-          chName: "配菜",
-          engName: "Side Dish",
-        }],
+            name: 'AP',
+            chName: "开胃菜",
+            engName: "Appetizers",
+            recipes: [],
+          },
+          {
+            name: 'MC',
+            chName: "主菜",
+            engName: "Main Course",
+            recipes: [],
+          },
+          {
+            name: 'DE',
+            chName: "甜品",
+            engName: "Desserts",
+            recipes: [],
+          },
+          {
+            name: 'DR',
+            chName: "饮品",
+            engName: "Drinks",
+            recipes: [],
+          },
+          {
+            name: 'SD',
+            chName: "配菜",
+            engName: "Side Dish",
+            recipes: [],
+          }]
+    );
+
+    // 从leancloud加载所有菜谱并添加中文、英文名到categories。
+    getAllRecipes().then(res => {
+      for (let i of res){
+        console.log(i);
+        let item = {
+          chName: i.chName,
+          engName: i.engName,
+        };
+        for (let category of categories){
+          if (category.name == i.category){
+            category.recipes.push(item);
+          }
+        }
+      }
+    });
+
+    return {
+      categories,
     };
   },
-  methods: {
 
-  },
+  // 内部组件
   components: {
     categoryItem,
   }

@@ -1,28 +1,52 @@
 <template>
   <div id="recipe-page-box">
-    <front-info></front-info>
-    <ingredient-component></ingredient-component>
-    <process-component></process-component>
-    <tips-component></tips-component>
+    <front-info :basicInfo="basicInfo"></front-info>
+    <ingredient-component :ingredient="recipe.ingredient"></ingredient-component>
+    <process-component :process="recipe.process"></process-component>
+    <tips-component :tips="recipe.tips"></tips-component>
     <div id="feedbackBox"> feedback box to be written.</div>
   </div>
 </template>
 
 <script>
-import { Recipe } from '../js/recipeConstructor.js';
+// import { Recipe } from '../js/recipeConstructor.js';
+import {reactive} from 'vue';
 import frontInfo from './recipe-page-components/front-info.vue';
 import ingredientComponent from './recipe-page-components/ingredient-component.vue';
 import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
 
 export default {
-  setup(){
-    
-  },
   name: "recipe-page",
+  setup(){
+    let recipe = reactive({
+      chName:'菜品名称',
+      engName: 'English Dish Name',
+      time: 0,
+      category: 'MC',
+      serve: 1,
+      tags: ['意大利菜','咸鲜','美味'],
+      rating: 4.5,
+      ingredient: [{food: '牛肉', weight: '20g'}],
+      process: ['process ','process','process','process',],
+      tips: ['tips','tips'],
+    });
+    return {
+      recipe,
+      basicInfo: reactive({
+        chName: recipe.chName,
+        engName: recipe.engName,
+        time: recipe.time,
+        category: recipe.category,
+        serve: recipe.serve,
+        tags: recipe.tags,
+        rating: recipe.rating,
+      }),
+    };
+  },
   beforeRouteEnter(){
-    let recipe = new Recipe();
-    console.log(recipe);
+    // let recipe = new Recipe();
+    // console.log(recipe);
   },
   components: {
     frontInfo,
