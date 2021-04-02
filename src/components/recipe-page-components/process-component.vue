@@ -60,7 +60,7 @@ h2 {
  }
  #process {
    display: flex;
-   margin-bottom: 0.2em;
+   margin-bottom: 0.6em;
    width: 100%;
  }
  #item {

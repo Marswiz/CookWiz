@@ -10,17 +10,19 @@
 </template>
 
 <script>
-import {reactive} from 'vue';
+import {reactive,provide} from 'vue';
 import frontInfo from './recipe-page-components/front-info.vue';
 import ingredientComponent from './recipe-page-components/ingredient-component.vue';
 import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
 import {useRoute} from 'vue-router';
-import {getRecipeFromId} from "@/js/leancloudInit";
+import {getRecipeFromId,getFoodNutritionByName} from "@/js/leancloudInit";
 
 export default {
   name: "recipe-page",
   setup(){
+    let route = useRoute();
+    // 菜谱的初始值：一个响应式对象
     let recipe = reactive({
       chName:'',
       engName: '',
@@ -33,13 +35,25 @@ export default {
       process: [''],
       tips: [''],
     });
-    let route = useRoute();
+
+    // 所需食材信息的初始值：一个响应式数组
+    let foods = reactive([]);
+
+    // 异步从leancloud库获取上述两个变量
     getRecipeFromId(route.params.id).then(res => {
       let keys = Object.keys(recipe);
       for (let key of keys){
         recipe[key] = res[key];
       }
+      // 获取需要的食材营养信息
+      for (let i of res.ingredient){
+        getFoodNutritionByName(i.food).then((food)=>{
+          food.weight = i.weight;
+          foods.push(food);
+        });
+      }
     });
+    provide('foods',foods);
     return {
       recipe,
     };

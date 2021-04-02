@@ -5,59 +5,61 @@
   </div>
   <div id="ingredient-box" v-for="(item,index) in ingredient" :key="index" @change="$emit('loadIngredient',ingredientRes)">
     <select name="food" id="food" v-model="item.food">
-      <option :value="item.name" v-for="(item,key) in foods" :key="key">{{item.name}}</option>
+      <option :value="item.food" v-for="(item,key) in foods" :key="key">{{item.food}}</option>
     </select>
     <input type="number" v-model="item.weight">
   </div>
 </template>
 
 <script>
+import {getFoods} from "@/js/leancloudInit";
+import {reactive,computed} from 'vue';
+
 export default {
   name: "add-recipe-ingredient-component",
-  data(){
-    return {
-      ingredient: [{food: 'food1', weight: 1}],
-      foods: [{
-        name: 'food1',
-        protein: 10,
-        sugar: 20,
-        fat: 10,
-      },{
-        name: 'food2',
-        protein: 10,
-        sugar: 20,
-        fat: 10,
-      },{
-        name: 'food3',
-        protein: 10,
-        sugar: 20,
-        fat: 10,
-      }],
-    };
-  },
-  computed:{
-    ingredientRes(){
+  setup(){
+    // 获取食物列表
+    let foods = reactive([]);
+    let ingredient = reactive([{food: '', weight: 1}]);
+    getFoods().then(res => {
+      for (let i of res){
+        foods.push(i);
+      }
+    });
+
+    //
+    let ingredientRes = computed(()=>{
       let res = [];
-      for (let i = 0; i < this.ingredient.length; i++){
-        if (this.ingredient[i].weight > 0){
-          res.push({food: this.ingredient[i].food, weight: parseFloat(this.ingredient[i].weight)});
+      for (let i = 0; i < ingredient.length; i++){
+        if (ingredient[i].weight > 0){
+          res.push({food: ingredient[i].food, weight: parseFloat(ingredient[i].weight)});
         }
       }
       return res;
-    },
-  },
-  methods: {
-    show(){
+    });
+
+    function show(){
       console.log(this.ingredient);
-    },
-    addItem(){
-      this.ingredient.push({food: 'food1', weight: 1});
-    },
-    removeItem(){
+    }
+
+    function addItem(){
+      this.ingredient.push({food: '', weight: 1});
+    }
+
+    function removeItem(){
       if (this.ingredient.length > 1){
         this.ingredient.pop();
       }
-    },
+    }
+
+    return {
+      foods,
+      ingredient,
+      ingredientRes,
+      show,
+      addItem,
+      removeItem,
+    };
   },
   emits: ['loadIngredient'],
 }

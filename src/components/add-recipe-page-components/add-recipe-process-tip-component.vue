@@ -69,4 +69,13 @@
     height: 30px;
     color: white;
   }
+  #item {
+    display: flex;
+  }
+  #item label{
+    flex: 1;
+  }
+  #item input{
+    flex: 10;
+  }
 </style>

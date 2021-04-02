@@ -48,7 +48,7 @@ export default {
     text-align: justify;
     &::before {
       content: '●';
-      margin-right: 1.2em;
+      margin-right: .9em;
       color: #ef8781;
     }
   }

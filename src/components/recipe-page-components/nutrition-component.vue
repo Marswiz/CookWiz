@@ -1,43 +1,21 @@
 <template>
   <div id="nutrition">
-    <p><span class="item">热量：</span>{{nutritionInfo.energy}}cal</p>
-    <p><span class="item">蛋白质：</span>{{nutritionInfo.protein}}g</p>
-    <p><span class="item">碳水：</span>{{nutritionInfo.sugar}}g</p>
-    <p><span class="item">脂肪：</span>{{nutritionInfo.fat}}g</p>
+    <p><div class="item">热量：</div><div class="value">{{nutritionInfo.energy}}kJ</div></p>
+    <p><div class="item">蛋白质：</div><div class="value">{{nutritionInfo.protein}}g</div></p>
+    <p><div class="item">碳水：</div><div class="value">{{nutritionInfo.sugar}}g</div></p>
+    <p><div class="item">脂肪：</div><div class="value">{{nutritionInfo.fat}}g</div></p>
   </div>
 </template>
 
 <script>
-import {computed} from 'vue';
+import {computed,inject} from 'vue';
+// import {getFoodNutritionByName} from "@/js/leancloudInit";
+
 export default {
   name: "nutrition-component",
-  setup(props){
-    // 测试用食物列表
-    let nutritionList = [{
-      food: '排骨',
-      protein: 20,
-      fat: 10,
-      sugar: 7,
-      energy: 200,
-    },{
-      food: '大蒜',
-      protein: 10,
-      fat: 5,
-      sugar: 2,
-      energy: 20,
-    },{
-      food: '胡萝卜',
-      protein: 8,
-      fat: 9,
-      sugar: 2,
-      energy: 160,
-    },{
-      food: '青椒',
-      protein: 2,
-      fat: 2,
-      sugar: 8,
-      energy: 80,
-    },];
+  setup(){
+
+    const foods = inject('foods');
 
     let nutritionInfo = computed(()=>{
       let res = {
@@ -47,24 +25,9 @@ export default {
         energy: 0,
       };
 
-      // find food by name.
-      function findFood(name){
-        for (let i of nutritionList){
-          if (i.food == name){
-            return i;
-          }
-        }
-      }
-
-      // convert weight string to number
-      function weightToNum(weightStr){
-        return +weightStr.slice(0,weightStr.length-1);
-      }
-
-      for (let i of props.ingredient){
-        let food = findFood(i.food);
+      for (let i of foods){
         for (let j of Object.keys(res)){
-          res[j] += food[j]*weightToNum(i.weight)/100;
+          res[j] += i[j]*i.weight/100;
         }
       }
 
@@ -82,26 +45,30 @@ export default {
   props: [
       'ingredient',
   ],
-  data(){
-    return {
-      protein: 100,
-      fat: 20,
-      sugar: 10,
-      calories: 50,
-    };
-  },
 }
 </script>
 
 <style scoped>
 #nutrition {
   display: grid;
+  justify-content: center;
   height: 3em;
   width: 100%;
   grid-template-rows: 1fr 1fr;
   grid-template-columns: 1fr 1fr;
 }
+p {
+  display: flex;
+  width: 100%;
+  font-size: .8em;
+  justify-content: space-between;
+}
 .item {
   font-weight: bold;
+}
+.value {
+  padding-right: 1em;
+  color: #ef8781;
+  text-align: right;
 }
 </style>

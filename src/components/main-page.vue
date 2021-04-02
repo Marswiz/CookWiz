@@ -46,7 +46,12 @@ export default {
             chName: "配菜",
             engName: "Side Dish",
             recipes: [],
-          }]
+          },{
+          name: 'BS',
+          chName: "基础",
+          engName: "Basics",
+          recipes: [],
+        },]
     );
 
     // 从leancloud加载所有菜谱并添加中文、英文名到categories。

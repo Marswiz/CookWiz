@@ -19,6 +19,7 @@
           <option value="DR">饮品</option>
           <option value="DE">甜品</option>
           <option value="SD">配菜</option>
+          <option value="BS">基础</option>
         </select>
       </div>
       <div id="item">
@@ -47,12 +48,13 @@
         <add-recipe-process-tip-component :type="'tips'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
       </fieldset>
-      <button id="submit" @click="submit">Submit</button>
+      <button id="submit" @click="upload">Submit</button>
   </div>
 </template>
 
 <script>
 import {Recipe} from '../js/recipeConstructor.js';
+import {uploadRecipe} from "@/js/leancloudInit";
 import addRecipeIngredientComponent from './add-recipe-page-components/add-recipe-ingredient-component.vue';
 import addRecipeProcessTipComponent from './add-recipe-page-components/add-recipe-process-tip-component.vue';
 
@@ -93,8 +95,8 @@ export default {
       this.recipe[items.type] = items.content;
       console.log(this.recipe[items.type]);
     },
-    submit(){
-      console.log(this.recipe);
+    upload(){
+      uploadRecipe(this.recipe);
     },
   },
   computed: {
@@ -124,7 +126,20 @@ export default {
     flex-direction: column;
     align-items: center;
   }
+  input {
+    width: 100%;
+  }
   #item{
     margin: 0.5em 0;
+  }
+  #submit {
+    border: none;
+    border-radius: 4px;
+    width: 8em;
+    height: 3em;
+    color: white;
+    font-size: 1em;
+    background-color: tomato;
+    font-weight: bold;
   }
 </style>
