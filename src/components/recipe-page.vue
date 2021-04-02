@@ -1,6 +1,7 @@
 <template>
   <div id="recipe-page-box" v-cloak>
     <front-info :basicInfo="recipe"></front-info>
+<!--    <ingredient-component :ingredient="recipe.ingredient"></ingredient-component>-->
     <ingredient-component :ingredient="recipe.ingredient"></ingredient-component>
     <process-component :process="recipe.process"></process-component>
     <tips-component :tips="recipe.tips"></tips-component>
@@ -9,7 +10,6 @@
 </template>
 
 <script>
-// import { Recipe } from '../js/recipeConstructor.js';
 import {reactive} from 'vue';
 import frontInfo from './recipe-page-components/front-info.vue';
 import ingredientComponent from './recipe-page-components/ingredient-component.vue';
@@ -29,7 +29,7 @@ export default {
       serve: 1,
       tags: [''],
       rating: 5,
-      ingredient: [{food: '', weight: 0}],
+      ingredient: [{food: '排骨', weight: '0g'}],
       process: [''],
       tips: [''],
     });
@@ -39,7 +39,6 @@ export default {
       for (let key of keys){
         recipe[key] = res[key];
       }
-      console.log(recipe);
     });
     return {
       recipe,

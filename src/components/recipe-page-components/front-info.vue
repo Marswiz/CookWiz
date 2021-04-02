@@ -8,15 +8,15 @@
       <front-info-tag icon-name="user-o" :tag-info="recipeBasicInfo.serve+'人份'"></front-info-tag>
     </div>
     <div id="tag-box">
-      <front-info-tag icon-name="tag" :tag-info="recipeBasicInfo.tags.toString()"></front-info-tag>
+      <front-info-tag icon-name="tag" :tag-info="tagsString"></front-info-tag>
     </div>
     <rating-component :rating="recipeBasicInfo.rating"></rating-component>
-    <nutrition-component></nutrition-component>
+    <nutrition-component :ingredient="recipeBasicInfo.ingredient"></nutrition-component>
   </div>
 </template>
 
 <script>
-import {reactive,ref} from 'vue';
+import {computed} from 'vue';
 import frontInfoTag from './front-info-tag.vue';
 import ratingComponent from './rating-component.vue';
 import nutritionComponent from './nutrition-component.vue';
@@ -24,21 +24,19 @@ import nutritionComponent from './nutrition-component.vue';
 export default {
   name: "front-info",
   setup(props){
-    console.log(props.basicInfo);
-    let recipeBasicInfo = reactive(props.basicInfo);
-
     // tags数组展开为字符串。
-    let tags = ref('');
-     let calTags = ()=>{
-        for (let i = 0; i < recipeBasicInfo.tags.length; i++){
-          tags.value += recipeBasicInfo.tags[i];
-          tags.value += ' ';
+    let tagsString = computed(()=>{
+      let tags = '';
+        for (let i of props.basicInfo.tags){
+          tags += i;
+          tags += ' ';
         }
-      }
-      calTags();
+      return tags;
+    });
+
     return {
-      recipeBasicInfo,
-      tags,
+      recipeBasicInfo: props.basicInfo,
+      tagsString,
     };
   },
   props: [

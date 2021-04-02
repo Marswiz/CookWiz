@@ -7,15 +7,8 @@
 </template>
 
 <script>
-import {getAllRecipes} from "@/js/leancloudInit";
-
 export default {
   name: 'App',
-  setup(){
-    getAllRecipes().then(res=>{
-      console.log(res);
-    });
-  },
 }
 </script>
 

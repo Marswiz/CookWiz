@@ -1,29 +1,29 @@
 <template>
     <h2>Ingredient</h2>
-    <div id="ingredient-box" @click="show()">
+    <div id="ingredient-box">
       {{ ingredientString }}
     </div>
 </template>
 
 <script>
+import {computed} from 'vue';
   export default {
     name: "ingredient-component",
-    computed:{
-      ingredientString(){
-        let res = '';
-        for (let i = 0; i < this.ingredient.length; i++){
-          res += this.ingredient[i].food;
-          res += ' ';
-          res += this.ingredient[i].weight;
-          res += ' ';
-        }
-        return res;
-      },
-    },
-    methods:{
-      show(){
-        console.log(this.ingredient);
-      },
+    setup(props){
+      // 转换成分数组为字符串
+      const ingredientString = computed(() => {
+          let res = '';
+          for (let i = 0; i < props.ingredient.length; i++){
+            res += props.ingredient[i].food;
+            res += ' ';
+            res += props.ingredient[i].weight;
+            res += ' ';
+          }
+          return res;
+      });
+      return {
+        ingredientString,
+      };
     },
     props: [
         'ingredient'
