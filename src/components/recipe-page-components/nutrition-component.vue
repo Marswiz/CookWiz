@@ -14,8 +14,8 @@ import {computed,inject} from 'vue';
 export default {
   name: "nutrition-component",
   setup(){
-
     const foods = inject('foods');
+    console.log(foods);
 
     let nutritionInfo = computed(()=>{
       let res = {

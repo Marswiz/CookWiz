@@ -35,7 +35,7 @@
 <!-- 配料设置 -->
       <div id="item">
         <label>配料：</label>
-        <add-recipe-ingredient-component @loadIngredient="loadIngredient"></add-recipe-ingredient-component>
+        <add-recipe-ingredient-component @loadIngredient="loadIngredient" @loadSpecialIngredient="loadSpecialIngredient"></add-recipe-ingredient-component>
       </div>
 <!--  制作流程      -->
       <div id="item">
@@ -76,6 +76,7 @@ export default {
       tags: ['tag'],
       rating: 5,
       ingredient: [{food: 'food', weight: 0}],
+      specialIngredient: [{value:''}],
       process: ['process'],
       tips: ['tips'],
     };
@@ -83,12 +84,13 @@ export default {
     this.recipe = recipe;
   },
   methods: {
-    showChange(){
-      console.log(this.recipe);
-    },
     // 用于从子组件add-recipe-ingredient-component接收参数并更新到recipe.ingredient
     loadIngredient(ingredient){
       this.recipe.ingredient = ingredient;
+    },
+    // 用于从子组件add-recipe-ingredient-component接收参数并更新到recipe.specialIngredient
+    loadSpecialIngredient(specialIngredient){
+      this.recipe.specialIngredient = specialIngredient;
     },
     // 用于从子组件接收process或tip
     loadItems(items){

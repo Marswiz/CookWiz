@@ -1,13 +1,21 @@
 <template>
   <div id="btnBox">
-    <button id="addItem" @click="addItem()">+</button>
-    <button id="removeItem" @click="removeItem()">-</button>
+    <button id="addItem" @click="addItem('ingredient')">+</button>
+    <button id="removeItem" @click="removeItem('ingredient')">-</button>
   </div>
   <div id="ingredient-box" v-for="(item,index) in ingredient" :key="index" @change="$emit('loadIngredient',ingredientRes)">
     <select name="food" id="food" v-model="item.food">
       <option :value="item.food" v-for="(item,key) in foods" :key="key">{{item.food}}</option>
     </select>
     <input type="number" v-model="item.weight">
+  </div>
+  <div>Special Ingredients:</div>
+  <div id="btnBox">
+    <button id="addItem" @click="addItem('specialIngredient')">+</button>
+    <button id="removeItem" @click="removeItem('specialIngredient')">-</button>
+  </div>
+  <div id="specialIngredient" v-for="(item,index) in specialIngredient" :key="index" @change="$emit('loadSpecialIngredient',specialIngredientRes)">
+    <span>{{index+1}}. </span><input type="text" v-model="item.value">
   </div>
 </template>
 
@@ -18,16 +26,18 @@ import {reactive,computed} from 'vue';
 export default {
   name: "add-recipe-ingredient-component",
   setup(){
+    let ingredient = reactive([{food: '', weight: 1}]);
+    let specialIngredient = reactive([{value: ''}]);
+
     // 获取食物列表
     let foods = reactive([]);
-    let ingredient = reactive([{food: '', weight: 1}]);
     getFoods().then(res => {
       for (let i of res){
         foods.push(i);
       }
     });
 
-    //
+    // 将ingredient组装成为供上传的对象格式
     let ingredientRes = computed(()=>{
       let res = [];
       for (let i = 0; i < ingredient.length; i++){
@@ -38,41 +48,47 @@ export default {
       return res;
     });
 
-    function show(){
-      console.log(this.ingredient);
-    }
+    // 将soecialIngredient组装成为供上传的对象格式
+    let specialIngredientRes = computed(()=>{
+      let res = [];
+      for (let i = 0; i < specialIngredient.length; i++){
+        res.push(specialIngredient[i].value);
+      }
+      return res;
+    });
 
-    function addItem(){
-      this.ingredient.push({food: '', weight: 1});
+    // 增删按钮操作事件
+    function addItem(type){
+      this[type].push({});
     }
-
-    function removeItem(){
-      if (this.ingredient.length > 1){
-        this.ingredient.pop();
+    function removeItem(type){
+      if (this[type].length > 1){
+        this[type].pop();
       }
     }
 
     return {
       foods,
       ingredient,
+      specialIngredient,
+      specialIngredientRes,
       ingredientRes,
-      show,
       addItem,
       removeItem,
+      show: ()=>{console.log(specialIngredientRes,ingredientRes)},
     };
   },
-  emits: ['loadIngredient'],
+  emits: ['loadIngredient','loadSpecialIngredient'],
 }
 </script>
 
 <style scoped>
-  span{
-    border: 1px solid tomato;
-    border-radius: 2px;
-  }
   #btnBox{
     display: flex;
     align-items: center;
+  }
+  select {
+
   }
   button {
     display: flex;

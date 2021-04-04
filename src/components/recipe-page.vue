@@ -1,8 +1,7 @@
 <template>
   <div id="recipe-page-box" v-cloak>
     <front-info :basicInfo="recipe"></front-info>
-<!--    <ingredient-component :ingredient="recipe.ingredient"></ingredient-component>-->
-    <ingredient-component :ingredient="recipe.ingredient"></ingredient-component>
+    <ingredient-component :ingredient="recipe.ingredient" :specialIngredient="recipe.specialIngredient"></ingredient-component>
     <process-component :process="recipe.process"></process-component>
     <tips-component :tips="recipe.tips"></tips-component>
     <div id="feedbackBox"> feedback box to be written.</div>
@@ -32,6 +31,7 @@ export default {
       tags: [''],
       rating: 5,
       ingredient: [{food: '排骨', weight: '0g'}],
+      specialIngredient:[''],
       process: [''],
       tips: [''],
     });
@@ -45,13 +45,23 @@ export default {
       for (let key of keys){
         recipe[key] = res[key];
       }
+      console.log(recipe)
+
       // 获取需要的食材营养信息
+      let foodList = [];
       for (let i of res.ingredient){
-        getFoodNutritionByName(i.food).then((food)=>{
-          food.weight = i.weight;
-          foods.push(food);
-        });
+        foodList.push(i.food);
       }
+      getFoodNutritionByName(...foodList).then((foodList)=>{
+        res.ingredient.forEach((i)=>{
+          for (let j of foodList){
+            if (i.food === j.food){
+              j.weight = i.weight;
+              foods.push(j);
+            }
+          }
+        });
+      });
     });
     provide('foods',foods);
     return {

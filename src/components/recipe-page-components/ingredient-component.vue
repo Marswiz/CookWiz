@@ -2,6 +2,7 @@
     <h2>Ingredient</h2>
     <div id="ingredient-box">
       <p id="ingredient" v-for="(ingredient,index) in ingredientStringArr" :key="index">{{ingredient}}</p>
+      <p id="specialIngredient" v-for="(ingredient,index) in specialIngredient" :key="index">{{ingredient}}</p>
     </div>
 </template>
 
@@ -28,7 +29,8 @@ import {computed} from 'vue';
       };
     },
     props: [
-        'ingredient'
+        'ingredient',
+        'specialIngredient',
     ],
   }
 </script>

@@ -1,17 +1,17 @@
 <template>
   <div id="front-info-box">
-    <div id="recipe-title">{{ recipeBasicInfo.chName }}</div>
-    <div id="recipe-title-eng">{{ recipeBasicInfo.engName }}</div>
+    <div id="recipe-title">{{ basicInfo.chName }}</div>
+    <div id="recipe-title-eng">{{ basicInfo.engName }}</div>
     <div id="info-box">
-      <front-info-tag icon-name="clock-o" :tag-info="recipeBasicInfo.time+'min'"></front-info-tag>
-      <front-info-tag icon-name="bookmark-o" :tag-info="recipeBasicInfo.category"></front-info-tag>
-      <front-info-tag icon-name="user-o" :tag-info="recipeBasicInfo.serve+'人份'"></front-info-tag>
+      <front-info-tag icon-name="clock-o" :tag-info="basicInfo.time+'min'"></front-info-tag>
+      <front-info-tag icon-name="bookmark-o" :tag-info="basicInfo.category"></front-info-tag>
+      <front-info-tag icon-name="user-o" :tag-info="basicInfo.serve+'人份'"></front-info-tag>
     </div>
     <div id="tag-box">
       <front-info-tag icon-name="tag" :tag-info="tagsString"></front-info-tag>
     </div>
-    <rating-component :rating="recipeBasicInfo.rating"></rating-component>
-    <nutrition-component :ingredient="recipeBasicInfo.ingredient"></nutrition-component>
+    <rating-component :rating="basicInfo.rating"></rating-component>
+    <nutrition-component :ingredient="basicInfo.ingredient"></nutrition-component>
   </div>
 </template>
 
@@ -35,7 +35,6 @@ export default {
     });
 
     return {
-      recipeBasicInfo: props.basicInfo,
       tagsString,
     };
   },
