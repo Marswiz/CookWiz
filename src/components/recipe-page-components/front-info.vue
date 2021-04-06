@@ -27,10 +27,10 @@ export default {
     // tags数组展开为字符串。
     let tagsString = computed(()=>{
       let tags = '';
-        for (let i of props.basicInfo.tags){
-          tags += i;
-          tags += ' ';
-        }
+      for (let i = 0; i < props.basicInfo.tag.length; i++){
+        tags += props.basicInfo.tag[i];
+        tags += ' ';
+      }
       return tags;
     });
 
@@ -58,7 +58,7 @@ export default {
     align-items: center;
     width: 100%;
     #recipe-title {
-      font-family: '华光大标宋_CNKI';
+      font-family: '华文中宋';
       color: $main-color;
       margin: 2em 0 0.6em 0;
       font-size: 1.6em;
@@ -75,7 +75,7 @@ export default {
     }
     #tag-box{
       align-self: stretch;
-      margin-top: 0.1em;
+      margin: 0.2em 0;
     }
   }
 

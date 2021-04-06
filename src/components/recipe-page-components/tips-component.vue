@@ -1,9 +1,11 @@
 <template>
-  <h2>Tips</h2>
-  <div id="tips">
-    <p v-for="(item,index) in tips" :key="index" id="tip">
-      {{ item }}
-    </p>
+  <div style="display: flex;flex-direction: column;align-items: center;">
+    <h2>Tips</h2>
+    <div id="tips">
+      <p v-for="(item,index) in tips" :key="index" id="tip">
+        {{ item }}
+      </p>
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,7 @@ export default {
   h2 {
     margin-top: 2em;
     letter-spacing: .15em;
+    text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
   }
   #tips{
     width: 100%;
@@ -44,12 +47,15 @@ export default {
     }
   }
   #tip {
-    margin-bottom: 0.2em;
+    margin-bottom: 0.3em;
     text-align: justify;
     &::before {
       content: '●';
       margin-right: .9em;
       color: #ef8781;
+    }
+    &::after{
+      content: ';';
     }
   }
 </style>

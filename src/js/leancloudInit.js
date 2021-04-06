@@ -29,21 +29,26 @@ async function getRecipeFromId(id){
   return res[0].toJSON();
 }
 
-// 按名称从foodData class获取食物
-async function getFoodNutritionByName(name){
-  const queryFood = new AV.Query('foodData');
-  queryFood.equalTo('food', name);
-  let res = await queryFood.find();
+// 按名称列表一次性从foodData class获取食物信息清单
+async function getFoodNutritionByName(...names){
+  let queryArr = [];
+  for (let i of names){
+    const queryFood = new AV.Query('foodData');
+    queryFood.equalTo('food', i);
+    queryArr.push(queryFood);
+  }
+  const query = AV.Query.or(...queryArr);
+  let res = await query.find();
   if (res.length > 0){
-    return res[0].toJSON();
+    return res.map( item => item.toJSON() );
   } else {
-    return {
-        food: '',
+    return [{
+        food: 'default',
         protein: 0,
         fat: 0,
         sugar: 0,
         energy: 0,
-    };
+    }];
   }
 }
 
@@ -75,6 +80,7 @@ function uploadRecipe(recipe){
       recipeUpload.set(key, recipe[key]);
     }
   }
+  console.log(recipe);
   recipeUpload.save().then(res=>{
     alert(`菜谱：${res.chName} 上传成功！`);
   }, error=>{

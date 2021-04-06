@@ -1,9 +1,8 @@
 <template>
   <div id="catagory-item-box">
-    <a id="catagoryItem" @click="shown = !shown">
+    <a id="catagoryItem" @click="toggleShown" :style="shownStyle">
       <p id="categoryNameChinese">
-        {{chineseName}}<span v-if="shown" class="flag">-</span>
-        <span v-else class="flag">+</span>
+        {{chineseName}}<span v-if="shown" class="flag">-</span><span v-else class="flag">+</span>
       </p>
       <p id="categoryNameEnglish"> {{englishName}} </p>
     </a>
@@ -15,11 +14,29 @@
 
 <script>
 import recipeItems from "./recipe-items.vue";
+import {ref, computed} from 'vue';
 
 export default {
-  data(){
+  setup(){
+    let shown = ref(false);
+    const toggleShown = function (){
+      shown.value = !shown.value;
+    };
+
+    const shownStyle = computed(()=>{
+      if (shown.value) {
+        return {
+          textShadow: '1px 1px 0 white,3px 3px 0 lightgrey',
+        };
+      } else {
+        return {};
+      }
+    });
+
     return {
-      shown: false,
+      shown,
+      toggleShown,
+      shownStyle,
     };
   },
   props: {
@@ -37,12 +54,16 @@ export default {
 
 // Define the animation duration time of all animation effects.
 $animationTime: 0.3s;
+
  #catagory-item-box{
    margin: 1.4em 0;
  }
+
  #catagoryItem {
    text-decoration: none;
-   color: black;
+   color: rgba(0,0,0);
+   cursor: pointer;
+   transition: all 0.25s;
  }
 
  p {
@@ -58,7 +79,6 @@ $animationTime: 0.3s;
      display: inline-block;
      margin-left: 0.4em;
      font-weight: bold;
-     transition: all 0.5s;
    }
  }
 

@@ -1,0 +1,20 @@
+/*font-face*/
+@font-face {
+    font-family: 'TodaySB-Caps';
+    src: url("TodaySB-Caps.otf");
+}
+
+@font-face {
+    font-family: '华文仿宋';
+    src: url("STFANGSO.TTF");
+}
+
+@font-face {
+    font-family: '华文中宋';
+    src: url("STZHONGS.TTF");
+}
+
+@font-face {
+    font-family: 'High Tower Text';
+    src: url("HTOWERT.TTF");
+}

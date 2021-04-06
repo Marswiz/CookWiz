@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
  #rating {
-   margin: 1em 0;
+   margin: 1.4em 0;
    color: #ef8781;
  }
  #stars {

@@ -4,6 +4,7 @@ import App from './App.vue';
 import mainPage from './components/main-page.vue';
 import recipePage from './components/recipe-page.vue';
 import addRecipePage from './components/add-recipe-page.vue';
+import './assets/fonts/font.css';
 
 let routes = [
     {

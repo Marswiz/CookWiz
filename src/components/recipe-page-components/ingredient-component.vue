@@ -1,9 +1,11 @@
 <template>
+  <div style="display: flex;flex-direction: column;align-items: center;">
     <h2>Ingredient</h2>
     <div id="ingredient-box">
       <p id="ingredient" v-for="(ingredient,index) in ingredientStringArr" :key="index">{{ingredient}}</p>
       <p id="specialIngredient" v-for="(ingredient,index) in specialIngredient" :key="index">{{ingredient}}</p>
     </div>
+  </div>
 </template>
 
 <script>
@@ -39,11 +41,13 @@ import {computed} from 'vue';
 h2 {
   margin-top: 2em;
   letter-spacing: .15em;
+  text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
 }
  #ingredient-box{
    display: grid;
    justify-content: center;
    grid-template-columns: 1fr 1fr;
+   gap: .5em;
    word-break: break-all;
    font-family: '华文仿宋',Serif;
    color: #757475;

@@ -8,6 +8,7 @@ class Recipe{
                     tags,
                     rating ,
                     ingredient,
+                    specialIngredient,
                     process,
                     tips,
                 } = {
@@ -19,6 +20,7 @@ class Recipe{
                       tags: ['tag'],
                       rating: 5,
                       ingredient: [{food: 'food', weight: 0}],
+                      specialIngredient:[''],
                       process: ['process'],
                       tips: ['tips'],
     }){
@@ -30,6 +32,7 @@ class Recipe{
         this.tags= tags;
         this.rating = rating;
         this.ingredient = ingredient;
+        this.specialIngredient = specialIngredient;
         this.process = process;
         this.tips = tips;
     }

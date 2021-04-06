@@ -28,7 +28,7 @@ export default {
       time: 0,
       category: '',
       serve: 1,
-      tags: [''],
+      tag: [''],
       rating: 5,
       ingredient: [{food: '排骨', weight: '0g'}],
       specialIngredient:[''],
@@ -45,7 +45,6 @@ export default {
       for (let key of keys){
         recipe[key] = res[key];
       }
-      console.log(recipe)
 
       // 获取需要的食材营养信息
       let foodList = [];

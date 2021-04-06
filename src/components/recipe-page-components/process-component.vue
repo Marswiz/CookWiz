@@ -1,10 +1,12 @@
 <template>
-  <h2>Process</h2>
-  <div id="process-box">
-    <p v-for="(item,index) in process" :key="index" id="process">
-      <div id="index">{{itemIndex[index]}}.</div>
-      <div id="item">{{item}}</div>
-    </p>
+  <div style="display: flex;flex-direction: column;align-items: center;">
+    <h2>Process</h2>
+    <div id="process-box">
+      <p v-for="(item,index) in process" :key="index" id="process">
+        <div id="index">{{itemIndex[index]}}.</div>
+        <div id="item">{{item}}</div>
+      </p>
+    </div>
   </div>
 </template>
 
@@ -47,10 +49,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 h2 {
   margin-top: 2em;
   letter-spacing: .15em;
+  text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
 }
  #process-box{
    align-self: flex-start;
@@ -66,6 +69,9 @@ h2 {
  #item {
    margin-left: 0.2em;
    flex: 10;
+    &::after{
+       content: ';';
+     }
  }
  #index{
    padding-top: .08em;
