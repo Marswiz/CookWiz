@@ -1,5 +1,7 @@
 // leancloud 配置
 import * as AV from "leancloud-storage";
+import md5 from 'md5';
+
 // initialize app.
 AV.init({
   appId: "1cIxhO0Vf6jLVLLKXPWdwTOK-MdYXbMMI",
@@ -7,23 +9,27 @@ AV.init({
 });
 
 // 获取所有菜谱函数
-async function getAllRecipes(){
-  const queryRecipes = new AV.Query('Recipes');
-  let res = await queryRecipes.find();
-  return res.map(i => i.toJSON());
+async function getAllRecipes(user){
+  const queryRecipes = new AV.Query(user+'_Recipes');
+  try {
+    let res = await queryRecipes.find();
+    return res.map(i => i.toJSON());
+  } catch (err){
+    return [{}];
+  }
 }
 
 // 按中文名获取菜谱函数
-async function getRecipeFromName(name){
-  const queryRecipes = new AV.Query('Recipes');
+async function getRecipeFromName(name,user){
+  const queryRecipes = new AV.Query(user+'_Recipes');
   queryRecipes.equalTo('chName', name);
   let res = await queryRecipes.find();
   return res[0].toJSON();
 }
 
 // 按objectId获取菜谱函数
-async function getRecipeFromId(id){
-  const queryRecipes = new AV.Query('Recipes');
+async function getRecipeFromId(id,user){
+  const queryRecipes = new AV.Query(user+'_Recipes');
   queryRecipes.equalTo('objectId', id);
   let res = await queryRecipes.find();
   return res[0].toJSON();
@@ -70,8 +76,8 @@ async function getFoods(){
 }
 
 // 上传菜谱函数
-function uploadRecipe(recipe){
-  const Recipe = AV.Object.extend('Recipes');
+function uploadRecipe(recipe,user){
+  const Recipe = AV.Object.extend(user+'_Recipes');
   const recipeUpload = new Recipe();
   for (let key of Object.keys(recipe)){
     if (key == 'time' || key == 'rating' || key == 'serve') {
@@ -88,18 +94,21 @@ function uploadRecipe(recipe){
   });
 }
 
+// 查询用户是否存在
+async function isUserExist(username){
+  const queryUser = new AV.Query('usersInfo');
+  queryUser.equalTo('Username',username);
+  let res = await queryUser.find();
+  if (res.length !== 0) return true;
+  return false;
+}
+
 // 登录用户函数
 async function login(username,password){
   const queryUser = new AV.Query('usersInfo');
   queryUser.equalTo('Username',username);
   let res = await queryUser.find();
-  if (res.length === 0) {
-    return {
-      user: '',
-      status: false,
-    };
-  }
-  if (password !== res[0].toJSON().Password) {
+  if (res.length === 0  || md5(password) !== md5(res[0].toJSON().Password)) {
     return {
       user: '',
       status: false,
@@ -112,6 +121,21 @@ async function login(username,password){
   };
 }
 
+// 注册用户函数
+async function register(username,password){
+  const usersInfo = AV.Object.extend('usersInfo');
+  const userInfo = new usersInfo();
+  userInfo.set('Username',username);
+  userInfo.set('Password',password);
+  userInfo.set('PasswordMD5',md5(password));
+  userInfo.save().then(()=>{
+    console.log('注册成功！');
+    return true;
+  },(err)=>{
+    throw err;
+  });
+}
+
 export {
   AV,
   getRecipeFromName,
@@ -120,5 +144,7 @@ export {
   getFoodNutritionByName,
   getFoods,
   uploadRecipe,
+  isUserExist,
   login,
+  register,
 };

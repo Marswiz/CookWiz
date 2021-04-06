@@ -8,13 +8,14 @@
 </template>
 
 <script>
-import {reactive} from 'vue';
+import {reactive,inject,watchEffect} from 'vue';
 import categoryItem from './menu-page-components/category-item.vue';
 import {getAllRecipes} from "@/js/leancloudInit";
 
 export default {
   name: 'main-page',
   setup(){
+    const userInfo = inject('userInfo');
     let categories = reactive(
         [
           {
@@ -55,20 +56,34 @@ export default {
     );
 
     // 从leancloud加载所有菜谱并添加中文、英文名到categories。
-    getAllRecipes().then(res => {
-      for (let i of res){
-        let item = {
-          chName: i.chName,
-          engName: i.engName,
-          id: i.objectId,
-        };
-        for (let category of categories){
-          if (category.name == i.category){
-            category.recipes.push(item);
+    function getRecipes(){
+      getAllRecipes(userInfo.user).then(res => {
+        for (let i of res){
+          let item = {
+            chName: i.chName,
+            engName: i.engName,
+            id: i.objectId,
+          };
+          for (let category of categories){
+            if (category.name == i.category){
+              category.recipes.push(item);
+            }
           }
         }
+      });
+    }
+
+    // 登出时，清除所有菜谱列表。
+    function clearRecipes(){
+      if (!userInfo.user){
+        for (let i of categories){
+          i.recipes = [];
+        }
       }
-    });
+    }
+
+    watchEffect(()=>{clearRecipes();});
+    getRecipes();
 
     return {
       categories,

@@ -83,6 +83,7 @@ export default {
     let recipe = new Recipe(defaultRecipe);
     this.recipe = recipe;
   },
+  inject: ['userInfo'],
   methods: {
     // 用于从子组件add-recipe-ingredient-component接收参数并更新到recipe.ingredient
     loadIngredient(ingredient){
@@ -98,7 +99,12 @@ export default {
       console.log(this.recipe[items.type]);
     },
     upload(){
-      uploadRecipe(this.recipe);
+      console.log(this.userInfo);
+      if (this.userInfo.logStatus){
+        uploadRecipe(this.recipe, this.userInfo.user);
+      } else {
+        this.$router.push('/');
+      }
     },
   },
   computed: {

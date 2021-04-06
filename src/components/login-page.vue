@@ -19,7 +19,7 @@
 <script>
 import validationComponent from '@/components/login-components/validation-component.vue';
 import {ref,reactive,inject} from 'vue';
-import {login} from "@/js/leancloudInit.js";
+import {login,register,isUserExist} from "@/js/leancloudInit.js";
 import { useRouter } from 'vue-router';
 
 export default {
@@ -42,6 +42,21 @@ export default {
           } else {
             messages.clear();
             messages.add('您输入的信息有误，或账号未经注册。');
+          }
+        });
+      }
+    };
+
+    // Register Function.
+    const registerFunc = function (){
+      check();
+      if (loginInputs.submitPermission){
+        isUserExist(loginInputs.username).then((res)=>{
+          if (!res){
+            register(loginInputs.username,loginInputs.password);
+            window.alert(loginInputs.username+' 注册成功！');
+          } else {
+            messages.add('用户已经注册，请直接登录。');
           }
         });
       }
@@ -100,6 +115,7 @@ export default {
     return {
       loginInputs,messages,
       loginFunc,
+      registerFunc,
       validationCode,
       loadValidationCode,
       check,

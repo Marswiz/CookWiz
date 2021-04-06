@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import {reactive,provide} from 'vue';
+import {reactive,provide,inject} from 'vue';
 import frontInfo from './recipe-page-components/front-info.vue';
 import ingredientComponent from './recipe-page-components/ingredient-component.vue';
 import processComponent from './recipe-page-components/process-component.vue';
@@ -21,6 +21,7 @@ export default {
   name: "recipe-page",
   setup(){
     let route = useRoute();
+    const userInfo = inject('userInfo');
     // 菜谱的初始值：一个响应式对象
     let recipe = reactive({
       chName:'',
@@ -40,7 +41,7 @@ export default {
     let foods = reactive([]);
 
     // 异步从leancloud库获取上述两个变量
-    getRecipeFromId(route.params.id).then(res => {
+    getRecipeFromId(route.params.id, userInfo.user).then(res => {
       let keys = Object.keys(recipe);
       for (let key of keys){
         recipe[key] = res[key];

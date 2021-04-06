@@ -13,21 +13,12 @@
 
 <script>
 export default {
-  setup(){
-    return {
-    };
-  },
   props: {
     recipes: Array,
   },
   computed: {
     isEmpty(){
       return !this.recipes.length;
-    },
-  },
-  methods: {
-    routeRecipe(name){
-      console.log(name);
     },
   },
 }

@@ -5,7 +5,7 @@
     </div>
     <div id="navContent" v-if="navShown" @mouseleave="hideNavbar" @click="hideNavbar">
       <router-link to="/">Main Menu</router-link>
-      <router-link to="/add-recipe">Add Recipe </router-link>
+      <router-link v-if="userInfo.logStatus" to="/add-recipe">Add Recipe </router-link>
       <router-link v-if="!userInfo.logStatus" to="/login"><i class="fa fa-key"></i> Login</router-link>
 <!--  logged in user info   -->
       <a v-else id="userInfo">
@@ -75,6 +75,7 @@ export default {
   body {
     margin: 0;
     padding: 0;
+    background-color: white;
   }
 
   #app {
