@@ -9,7 +9,7 @@
 
 <script>
 import {reactive} from 'vue';
-import categoryItem from './category-item.vue';
+import categoryItem from './menu-page-components/category-item.vue';
 import {getAllRecipes} from "@/js/leancloudInit";
 
 export default {

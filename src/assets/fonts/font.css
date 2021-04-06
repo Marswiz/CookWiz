@@ -18,3 +18,8 @@
     font-family: 'High Tower Text';
     src: url("HTOWERT.TTF");
 }
+
+@font-face {
+    font-family: 'Courier New';
+    src: url("cour.ttf");
+}

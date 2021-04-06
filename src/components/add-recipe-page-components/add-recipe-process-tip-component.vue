@@ -1,12 +1,14 @@
 <template>
-  <div id="btnBox">
-    <button id="addItem" @click="addItem()">+</button>
-    <button id="removeItem" @click="removeItem()">-</button>
-  </div>
-  <div id="itemsBox" @change="$emit('loadItems',{type:type ,content:itemsRes})">
-    <div id="item" v-for="(item,index) in items" :key="index">
-      <label :for="index">{{index+1}}. </label>
-      <input type="text" :id="type+index" v-model="items[index]">
+  <div>
+    <div id="btnBox">
+      <button id="addItem" @click="addItem()">+</button>
+      <button id="removeItem" @click="removeItem()">-</button>
+    </div>
+    <div id="itemsBox" @change="$emit('loadItems',{type:type ,content:itemsRes})">
+      <div id="item" v-for="(item,index) in items" :key="index">
+        <label :for="index">{{index+1}}. </label>
+        <input type="text" :id="type+index" v-model="items[index]">
+      </div>
     </div>
   </div>
 </template>

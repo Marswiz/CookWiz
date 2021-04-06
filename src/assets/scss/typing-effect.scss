@@ -1,0 +1,27 @@
+@charset "utf-8";
+
+@mixin typingEffect($time,$charNum,$caretColor,$caretBlinkTime){
+  //定义起始位置为宽度0.
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+  }
+
+  // 闪烁光标
+  @keyframes caret {
+    50% {
+      border-color: $caretColor;
+    }
+  }
+
+  // 给typing class对象添加样式
+  .typing {
+    width: $charNum+ch;
+    font-family: 'Courier New';
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 0.2em solid transparent;
+    animation: typing $time steps($charNum), caret $caretBlinkTime steps(1) infinite;
+  }
+}

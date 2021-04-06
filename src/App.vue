@@ -6,17 +6,40 @@
     <div id="navContent" v-if="navShown" @mouseleave="hideNavbar" @click="hideNavbar">
       <router-link to="/">Main Menu</router-link>
       <router-link to="/add-recipe">Add Recipe </router-link>
+      <router-link v-if="!userInfo.logStatus" to="/login"><i class="fa fa-key"></i> Login</router-link>
+<!--  logged in user info   -->
+      <a v-else id="userInfo">
+        <span style="text-decoration: underline">User: {{userInfo.user}}</span>
+        <p @click="logout">Log Out</p>
+      </a>
     </div>
     <router-view @mouseover="hideNavbar"></router-view>
   </div>
 </template>
 
 <script>
-import {ref} from 'vue';
+import {ref,reactive,onBeforeMount,provide} from 'vue';
+import { useRouter } from 'vue-router';
 
 export default {
   name: 'App',
   setup(){
+    const router = useRouter();
+
+    // 用户登录信息
+    const userInfo = reactive({
+      user: '',
+      logStatus: false,
+    });
+    provide('userInfo',userInfo);
+    // logout Function
+    const logout = function (){
+      if (window.confirm('Are you sure to logout?')){
+        userInfo.user = '';
+        userInfo.logStatus = false;
+      }
+    };
+
     let navShown = ref(false);
 
     // 切换显示导航栏函数
@@ -27,13 +50,20 @@ export default {
       navShown.value = false;
     }
 
+    // 保证在每次挂载前都跳转到menu页面
+    onBeforeMount(()=>{
+      router.push('/');
+    })
 
     return {
+      userInfo,
       showNavbar,
       navShown,
       hideNavbar,
+      logout,
     }
   },
+  provide: ['userInfo'],
 }
 </script>
 
@@ -99,6 +129,12 @@ export default {
         background: rgba(0,0,0,0.4);
       }
     }
+  }
+
+  #userInfo {
+    display: flex;
+    flex-direction: column;
+    //justify-content: center;
   }
 
 }

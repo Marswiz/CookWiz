@@ -1,21 +1,23 @@
 <template>
-  <div id="btnBox">
-    <button id="addItem" @click="addItem('ingredient')">+</button>
-    <button id="removeItem" @click="removeItem('ingredient')">-</button>
-  </div>
-  <div id="ingredient-box" v-for="(item,index) in ingredient" :key="index" @change="$emit('loadIngredient',ingredientRes)">
-    <select name="food" id="food" v-model="item.food">
-      <option :value="item.food" v-for="(item,key) in foods" :key="key">{{item.food}}</option>
-    </select>
-    <input type="number" v-model="item.weight">
-  </div>
-  <div>Special Ingredients:</div>
-  <div id="btnBox">
-    <button id="addItem" @click="addItem('specialIngredient')">+</button>
-    <button id="removeItem" @click="removeItem('specialIngredient')">-</button>
-  </div>
-  <div id="specialIngredient" v-for="(item,index) in specialIngredient" :key="index" @change="$emit('loadSpecialIngredient',specialIngredientRes)">
-    <span>{{index+1}}. </span><input type="text" v-model="item.value">
+  <div>
+    <div id="btnBox">
+      <button id="addItem" @click="addItem('ingredient')">+</button>
+      <button id="removeItem" @click="removeItem('ingredient')">-</button>
+    </div>
+    <div id="ingredient-box" v-for="(item,index) in ingredient" :key="index" @change="$emit('loadIngredient',ingredientRes)">
+      <select name="food" id="food" v-model="item.food">
+        <option :value="item.food" v-for="(item,key) in foods" :key="key">{{item.food}}</option>
+      </select>
+      <input type="number" v-model="item.weight">
+    </div>
+    <div>Special Ingredients:</div>
+    <div id="btnBox">
+      <button id="addItem" @click="addItem('specialIngredient')">+</button>
+      <button id="removeItem" @click="removeItem('specialIngredient')">-</button>
+    </div>
+    <div id="specialIngredient" v-for="(item,index) in specialIngredient" :key="index" @change="$emit('loadSpecialIngredient',specialIngredientRes)">
+      <span>{{index+1}}. </span><input type="text" v-model="item.value">
+    </div>
   </div>
 </template>
 
