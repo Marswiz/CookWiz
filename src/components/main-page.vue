@@ -86,6 +86,7 @@ export default {
     getRecipes();
 
     return {
+      userInfo,
       categories,
     };
   },
