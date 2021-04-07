@@ -7,7 +7,7 @@
     <div id="itemsBox" @change="$emit('loadItems',{type:type ,content:itemsRes})">
       <div id="item" v-for="(item,index) in items" :key="index">
         <label :for="index">{{index+1}}. </label>
-        <input type="text" :id="type+index" v-model="items[index]">
+        <textarea :id="type+index" v-model="items[index]"></textarea>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
   export default {
     data(){
       return {
-        items: ['defaultItem'],
+        items: ['Please input your '+this.type+'...'],
       };
     },
     props: {
@@ -52,32 +52,49 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   #btnBox{
     display: flex;
     align-items: center;
   }
   button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border: none;
-    outline: none;
-    border-radius: 50%;
-    background: rgba(255,100,100,0.5);
-    font-size: 1.3em;
-    font-weight: bold;
-    width: 30px;
-    height: 30px;
+    margin-right: 1em;
+    margin-bottom: 1em;
+    background-color: black;
+    border-radius: .5em;
+    font-family: 'Courier New';
+    padding: 0 1em;
+    height: 8vw;
     color: white;
+    font-weight: bold;
+    &:active{
+       background-color: #a1a1a1;
+       text-decoration: underline;
+     }
+  }
+
+  textarea {
+    border: 2px solid black;
+    margin-left: 1em;
+    background-color: #ddd;
+    font-family: "Courier New";
+    font-weight: bold;
+    overflow: scroll;
+    height: 50px;
+    &:focus {
+       outline: 2px solid black;
+    }
   }
   #item {
     display: flex;
+    margin-top: .2em;
+    height: auto;
   }
   #item label{
     flex: 1;
   }
-  #item input{
+  #item textarea{
     flex: 10;
   }
 </style>

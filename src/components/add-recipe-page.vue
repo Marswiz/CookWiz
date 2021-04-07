@@ -1,7 +1,6 @@
 <template>
   <div id="addRecipePageBox">
-      <fieldset>
-      <legend> Recipe Submit Tools </legend>
+    <typing-effect-component style="align-self: flex-end;" :id="'addRecipeHeader'">Edit & Upload Your Own Recipe..</typing-effect-component>
       <div id="item">
        <label for="chName">中文名：</label><input type="text" id="chName" v-model="recipe.chName">
       </div>
@@ -13,7 +12,7 @@
       </div>
       <div id="item">
         <label for="category">类别：</label>
-        <select name="category" id="category" v-model="recipe.category" @change="showChange()">
+        <select style="border: 2px solid black;" name="category" id="category" v-model="recipe.category" @change="showChange()">
           <option value="MC">主菜</option>
           <option value="AP">开胃菜</option>
           <option value="DR">饮品</option>
@@ -29,8 +28,11 @@
         <label for="tags">标签：</label><input type="text" id="tags" v-model="tagsInput" @change="recipe.tag = tags">
       </div>
       <div id="item">
-        <label for="rating">评分：</label><input type="range" min="0" max="5" id="rating" v-model="recipe.rating">
-        <span>{{recipe.rating}}</span>
+        <label for="rating">评分：</label>
+        <div>
+          <input style="display: inline-block;width: 80%;" type="range" min="0" max="5" id="rating" v-model="recipe.rating">
+          <span style="display:inline-block;width: 15%;text-align: center;">{{recipe.rating}}</span>
+        </div>
       </div>
 <!-- 配料设置 -->
       <div id="item">
@@ -47,7 +49,6 @@
         <label>技巧提示：</label>
         <add-recipe-process-tip-component :type="'tips'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
-      </fieldset>
       <button id="submit" @click="upload">Submit</button>
   </div>
 </template>
@@ -55,6 +56,7 @@
 <script>
 import {Recipe} from '../js/recipeConstructor.js';
 import {uploadRecipe} from "@/js/leancloudInit";
+import typingEffectComponent from '@/components/add-recipe-page-components/typing-effect-component.vue';
 import addRecipeIngredientComponent from './add-recipe-page-components/add-recipe-ingredient-component.vue';
 import addRecipeProcessTipComponent from './add-recipe-page-components/add-recipe-process-tip-component.vue';
 
@@ -76,7 +78,7 @@ export default {
       tags: ['tag'],
       rating: 5,
       ingredient: [{food: 'food', weight: 0}],
-      specialIngredient: [{value:''}],
+      specialIngredient: [''],
       process: ['process'],
       tips: ['tips'],
     };
@@ -123,31 +125,68 @@ export default {
   },
   components:{
     addRecipeIngredientComponent,
-    addRecipeProcessTipComponent
+    addRecipeProcessTipComponent,
+    typingEffectComponent,
   },
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  #addRecipeHeader {
+    background-color: #000;
+    color: white;
+    margin: 2em 4vw;
+    outline: 2px solid black;
+    padding: 0.1em 0;
+    font-weight: bold;
+  }
+
   #addRecipePageBox{
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  input {
+    align-items: stretch;
+    padding: 5em 0;
     width: 100%;
   }
   #item{
-    margin: 0.5em 0;
+    display: grid;
+    grid-template-columns: 0.4fr 1fr;
+    gap: 1em;
+    margin: 0.8em 1em 0 1em;
+    //border: 2px solid black;
+    input {
+      display: block;
+      border: 2px solid black;
+      background-color: #ddd;
+      font-family: "Courier New";
+      font-weight: bold;
+      &:focus {
+        outline: 2px solid black;
+      }
+    }
+    label{
+      display: block;
+      font-weight: bold;
+      text-align: right;
+      font-family: '华文中宋','TodaySB-Caps',sans-serif;
+    }
   }
+
   #submit {
     border: none;
-    border-radius: 4px;
-    width: 8em;
-    height: 3em;
-    color: white;
-    font-size: 1em;
-    background-color: tomato;
+    align-self: center;
+    width: 92vw;
     font-weight: bold;
+    background-color: black;
+    font-family: 'Courier New';
+    padding: 0 2em;
+    height: 10vw;
+    margin: 2.5em 0;
+    color: white;
+    font-weight: bold;
+    &:active{
+      background-color: #a1a1a1;
+      text-decoration: underline;
+    }
   }
 </style>

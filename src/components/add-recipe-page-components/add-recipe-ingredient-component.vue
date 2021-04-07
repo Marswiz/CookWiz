@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="ingredient-component-box">
     <div id="btnBox">
       <button id="addItem" @click="addItem('ingredient')">+</button>
       <button id="removeItem" @click="removeItem('ingredient')">-</button>
@@ -10,7 +10,7 @@
       </select>
       <input type="number" v-model="item.weight">
     </div>
-    <div>Special Ingredients:</div>
+    <div style="margin:1em 0;text-decoration: underline;font-weight: bold;">Special Ingredients:</div>
     <div id="btnBox">
       <button id="addItem" @click="addItem('specialIngredient')">+</button>
       <button id="removeItem" @click="removeItem('specialIngredient')">-</button>
@@ -83,27 +83,45 @@ export default {
   emits: ['loadIngredient','loadSpecialIngredient'],
 }
 </script>
-
-<style scoped>
+<style scoped lang="scss">
+  #ingredient-box,#specialIngredient{
+    display: flex;
+    margin-bottom: .2em;
+    input {
+      width: 100%;
+      margin-left: 1em;
+      border: 2px solid black;
+      background-color: #ddd;
+      font-family: "Courier New";
+      font-weight: bold;
+      &:focus {
+        outline: 2px solid black;
+      }
+    }
+    select {
+      flex: 1;
+      display: block;
+      border-radius: .2em;
+      border: 2px solid black;
+    }
+  }
   #btnBox{
     display: flex;
-    align-items: center;
-  }
-  select {
-
-  }
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    outline: none;
-    border-radius: 50%;
-    background: rgba(255,100,100,0.5);
-    font-size: 1.3em;
-    font-weight: bold;
-    width: 30px;
-    height: 30px;
-    color: white;
+    button {
+      border: none;
+      margin-right: 1em;
+      margin-bottom: 1em;
+      background-color: black;
+      border-radius: .5em;
+      font-family: 'Courier New';
+      padding: 0 1em;
+      height: 8vw;
+      color: white;
+      font-weight: bold;
+      &:active{
+        background-color: #a1a1a1;
+        text-decoration: underline;
+      }
+    }
   }
 </style>

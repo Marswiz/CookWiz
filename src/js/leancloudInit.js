@@ -87,8 +87,8 @@ function uploadRecipe(recipe,user){
     }
   }
   console.log(recipe);
-  recipeUpload.save().then(res=>{
-    alert(`菜谱：${res.chName} 上传成功！`);
+  recipeUpload.save().then(()=>{
+    alert(`菜谱：${recipe.chName} 上传成功！`);
   }, error=>{
     console.warn(error);
   });
