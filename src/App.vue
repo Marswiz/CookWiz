@@ -9,7 +9,7 @@
       <router-link v-if="!userInfo.logStatus" to="/login"><i class="fa fa-key"></i> Login</router-link>
 <!--  logged in user info   -->
       <a v-else id="userInfo">
-        <span style="text-decoration: underline">User: {{userInfo.user}}</span>
+        <span style="text-decoration: underline"><i class="fa fa-user-o"></i>&nbsp; {{userInfo.user}} &nbsp;</span>
         <p @click="logout">Log Out</p>
       </a>
     </div>
