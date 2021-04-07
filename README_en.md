@@ -1,5 +1,5 @@
 # CookWiz
-[To English Version](/README_en.md)
+[To Chinese Version](/README.md)
 
 ![lemon_logo](/public/lemon_logo.png)
 
