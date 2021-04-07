@@ -1,5 +1,6 @@
 # CookWiz
 [To English Version](/README_en.md)
+
 ![lemon_logo](/public/lemon_logo.png)
 
 ## 基于Vue3的私人菜谱管理、展示与分享系统
@@ -30,14 +31,14 @@ CookWiz是一款基于Vue3的私人菜谱管理、展示与分享系统。它的
 
 Vue3 + Vue-Router + Vue-CLI + ES6/async + SCSS + Flex/Grid布局 + LeanCloud + 腾讯云cloudBase + Eslint + Git
 
-## 运行方式
-### 在线浏览
+## 运行方式*__*
+### 1.在线浏览
 
 点击下面链接以在线预览（目前仅适配移动端，PC请缩小页面或打开F12开发移动端选项）：
 
 [腾讯云CloudBase Serverless快速部署：CookWiz APP](https://cookwiz-1g3z8k0qb4ee0c8c-1254299756.tcloudbaseapp.com/#/)
 
-### 克隆仓库到本地运行
+### 2.克隆仓库到本地运行
 
 需要本地Node 6.0及以上环境。
 
@@ -76,7 +77,7 @@ npm run serve
 
 ### 作者
 
-Mars. 现职务为无人机动力系统工程师，业余前端爱好者，未来职业方向不可控。
+Mars. 现职务为某上市公司无人机动力系统工程师，业余前端爱好者，民间厨师、歌手，未来职业方向不可控。
 
 个人Blog：[Marswiz|Solid.路旁有花，心中有歌，天上有星](https://www.marswiz.com/)
 
