@@ -1,25 +1,29 @@
 /*font-face*/
 @font-face {
     font-family: 'TodaySB-Caps';
-    src: url("TodaySB-Caps.otf");
+    src: url("TodaySB-Caps.woff");
 }
 
 @font-face {
     font-family: '华文仿宋';
-    src: url("STFANGSO.TTF");
+    src: url("STFANGSO.woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: '华文中宋';
-    src: url("STZHONGS.TTF");
+    src: url("STZHONGS.woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'High Tower Text';
-    src: url("HTOWERT.TTF");
+    src: url("HTOWERT.woff");
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Courier New';
-    src: url("cour.ttf");
+    src: url("cour.woff");
+    font-display: swap;
 }
