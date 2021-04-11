@@ -1,7 +1,6 @@
 <template>
   <div id="loginPageRoot">
-    <img src="../../public/lemon_logo.png" alt="" style="align-self: flex-start;position: absolute;top: 1.5em;left: 1.5em;filter: drop-shadow(4px 4px 2px gray)">
-    <p id="loginHeader" :class="{typing: true}">&nbsp;Login your account&nbsp;</p>
+    <p id="loginHeader" :class="{typing: true}">Register new account</p>
     <div id="loginFormInput">
         <label class="loginLabel" for="username">Username:</label><input class="loginInput" v-model="loginInputs.username" type="text" id="username">
         <label class="loginLabel" for="password">Password:</label><input class="loginInput" v-model="loginInputs.password" type="password" id="password">
@@ -10,8 +9,7 @@
         <validation-component class="validationImg" @loadValidationCode="loadValidationCode"></validation-component>
     </div>
     <div id="loginFormSubmit">
-      <button id="loginBtn" class="loginBtn" @click="loginFunc">Login</button>
-      <button id="registerBtn" class="loginBtn"  @click="toRegisterFunc">I Wanna Register..</button>
+      <button id="registerBtn" class="loginBtn"  @click="registerFunc">Register</button>
     </div>
     <div id="messageBox" v-for="(message,index) in messages" :key="index"><i class="fa fa-warning"></i> {{message}}</div>
   </div>
@@ -19,38 +17,24 @@
 
 <script>
 import validationComponent from '@/components/login-components/validation-component.vue';
-import {ref,reactive,inject} from 'vue';
-import {login} from "@/js/leancloudInit.js";
+import {ref,reactive} from 'vue';
+import {register} from "@/js/leancloudInit.js";
 import { useRouter } from 'vue-router';
 
 export default {
   setup(){
     const router = useRouter();
 
-    // 从app.vue引入userInfo
-    const userInfo = inject('userInfo');
-
-    // login_register function.
-    const loginFunc = function (){
-      // 先执行检查
+    // Register Function.
+    const registerFunc = function (){
       check();
       if (loginInputs.submitPermission){
-        login(loginInputs.username,loginInputs.password).then((res)=>{
-          if (res.status){
-            userInfo.user = res.user;
-            userInfo.logStatus = res.status;
-            router.push('/');
-          } else {
-            messages.clear();
-            messages.add(res);
-          }
+        register(loginInputs.username, loginInputs.password).then((res)=>{
+          messages.clear();
+          res? alert('注册成功！'):messages.add('抱歉，用户名已经被使用。');
+          if (res) router.push('/login');
         });
       }
-    };
-
-    // router to Register page.
-    const toRegisterFunc = function (){
-      router.push('/register');
     };
 
     const loginInputs = reactive({
@@ -107,14 +91,13 @@ export default {
     return {
       loginInputs,
       messages,
-      loginFunc,
-      toRegisterFunc,
+      registerFunc,
       validationCode,
       loadValidationCode,
       check,
     };
   },
-  name: "login-page",
+  name: "register-page",
   components: {
     validationComponent,
   },

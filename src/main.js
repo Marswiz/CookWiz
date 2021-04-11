@@ -5,6 +5,7 @@ import mainPage from './components/main-page.vue';
 import recipePage from './components/recipe-page.vue';
 import addRecipePage from './components/add-recipe-page.vue';
 import loginPage from './components/login-page.vue';
+import registerPage from './components/register-page.vue';
 import './assets/fonts/font.css';
 
 let routes = [
@@ -23,6 +24,10 @@ let routes = [
     {
         path: '/login',
         component: loginPage,
+    },
+    {
+        path: '/register',
+        component: registerPage,
     },
 ];
 

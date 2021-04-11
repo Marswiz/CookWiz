@@ -10,7 +10,7 @@
 <!--  logged in user info   -->
       <a v-else id="userInfo">
         <span style="text-decoration: underline"><i class="fa fa-user-o"></i>&nbsp; {{userInfo.user}} &nbsp;</span>
-        <p @click="logout">Log Out</p>
+        <p @click="userLogout">Log Out</p>
       </a>
     </div>
     <router-view @mouseover="hideNavbar"></router-view>
@@ -20,21 +20,24 @@
 <script>
 import {ref,reactive,onBeforeMount,provide} from 'vue';
 import { useRouter } from 'vue-router';
+import { getLocalUser, logout} from "@/js/leancloudInit.js";
 
 export default {
   name: 'App',
   setup(){
     const router = useRouter();
 
-    // 用户登录信息
-    const userInfo = reactive({
-      user: '',
-      logStatus: false,
-    });
+    // 本地获取用户登录信息
+    let user = getLocalUser();
+    const userInfo = reactive(user);
+
+    // 为子组件提供userInfo对象
     provide('userInfo',userInfo);
+
     // logout Function
-    const logout = function (){
+    const userLogout = function (){
       if (window.confirm('Are you sure to logout?')){
+        logout();
         userInfo.user = '';
         userInfo.logStatus = false;
       }
@@ -50,9 +53,13 @@ export default {
       navShown.value = false;
     }
 
-    // 保证在每次挂载前都跳转到menu页面
+    // 根据是否登录跳转不同页面
     onBeforeMount(()=>{
-      router.push('/');
+      if (userInfo.user){
+        router.push('/');
+      } else {
+        router.push('/login');
+      }
     })
 
     return {
@@ -60,7 +67,7 @@ export default {
       showNavbar,
       navShown,
       hideNavbar,
-      logout,
+      userLogout,
     }
   },
   provide: ['userInfo'],

@@ -1,6 +1,6 @@
 <template>
   <div id="recipes">
-    <p v-if="isEmpty" style="color: #a1a1a1;margin-top: 1.2em;">暂无菜谱</p>
+    <p v-if="isEmpty" style="color: #a1a1a1;margin-top: 1.2em;">您食单该目录下暂无菜品</p>
     <p v-if="isEmpty" style="color: #a1a1a1;">No Recipes.</p>
     <router-link :to="'/recipe/'+recipe.id" v-for="recipe in recipes" :key="recipe.engName">
         <a id="recipeItem">

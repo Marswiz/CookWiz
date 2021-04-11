@@ -12,7 +12,7 @@ At the mean time, I can upgrade my skills of using Vue3.0 and other frontend too
 
 **These are the key features of CookWiz：**
 
-- Register & login your personal account, do the frontend validation, and get your personal recipe space after these operations. 
+- Register & login_register your personal account, do the frontend validation, and get your personal recipe space after these operations. 
 - Show your personal recipe menu by the category: Appetizers, Main Courses, Drinks, Side Dishes, Desserts, or Basic Foods.
 - Select & Show your recipe, which contains: Category, Serves, Duration, Ingredients, Processes, Tags, Tips, and Rating.
 - Based on the ingredients of special recipe, fetch the food nutrition info from data base and calculate calories, protein, fat, and carbohydrate of this particular recipe automatically. 
