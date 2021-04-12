@@ -1,10 +1,10 @@
 <template>
   <div id="recipe-page-box" v-cloak>
-    <front-info :basicInfo="recipe"></front-info>
+    <front-info :basicInfo="recipe" @togglePublic="togglePublic"></front-info>
     <ingredient-component :ingredient="recipe.ingredient" :specialIngredient="recipe.specialIngredient"></ingredient-component>
     <process-component :process="recipe.process"></process-component>
     <tips-component :tips="recipe.tips"></tips-component>
-    <div id="feedbackBox"> feedback box to be written.</div>
+    <feedback-component></feedback-component>
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import frontInfo from './recipe-page-components/front-info.vue';
 import ingredientComponent from './recipe-page-components/ingredient-component.vue';
 import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
+import feedbackComponent from './recipe-page-components/feedback-component.vue';
 import {useRoute} from 'vue-router';
 import {getRecipeFromId,getFoodNutritionByName} from "@/js/leancloudInit";
 
@@ -35,6 +36,7 @@ export default {
       specialIngredient:[''],
       process: [''],
       tips: [''],
+      isPublic: false,
     });
 
     // 所需食材信息的初始值：一个响应式数组
@@ -46,7 +48,6 @@ export default {
       for (let key of keys){
         recipe[key] = res[key];
       }
-
       // 获取需要的食材营养信息
       let foodList = [];
       for (let i of res.ingredient){
@@ -63,9 +64,15 @@ export default {
         });
       });
     });
+
+    function togglePublic(){
+      recipe['isPublic'] = !recipe['isPublic'];
+    }
+
     provide('foods',foods);
     return {
       recipe,
+      togglePublic,
     };
   },
   components: {
@@ -73,6 +80,7 @@ export default {
     ingredientComponent,
     processComponent,
     tipsComponent,
+    feedbackComponent,
   },
 }
 </script>

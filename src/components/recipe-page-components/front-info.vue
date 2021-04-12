@@ -10,20 +10,26 @@
     <div id="tag-box">
       <front-info-tag icon-name="tag" :tag-info="tagsString"></front-info-tag>
     </div>
+    <div id="publicInfo">
+      <div v-if="!basicInfo.isPublic" @click="toPublic(),$emit('togglePublic')"><i class="fa fa-lock"></i><span> Private</span></div>
+      <div v-if="basicInfo.isPublic" @click="toPrivate(),$emit('togglePublic')"><i class="fa fa-unlock"></i><span> Public</span></div>
+    </div>
     <rating-component :rating="basicInfo.rating"></rating-component>
     <nutrition-component :ingredient="basicInfo.ingredient"></nutrition-component>
   </div>
 </template>
 
 <script>
-import {computed} from 'vue';
+import {computed, inject} from 'vue';
 import frontInfoTag from './front-info-tag.vue';
 import ratingComponent from './rating-component.vue';
 import nutritionComponent from './nutrition-component.vue';
+import {publicUsersRecipe,privateUsersRecipe} from '@/js/leancloudInit.js';
 
 export default {
   name: "front-info",
   setup(props){
+    const userInfo = inject('userInfo');
     // tags数组展开为字符串。
     let tagsString = computed(()=>{
       let tags = '';
@@ -36,6 +42,12 @@ export default {
 
     return {
       tagsString,
+      toPublic: ()=>{
+        publicUsersRecipe(userInfo.user, props.basicInfo);
+      },
+      toPrivate: ()=>{
+        privateUsersRecipe(userInfo.user, props.basicInfo);
+      },
     };
   },
   props: [
@@ -45,7 +57,8 @@ export default {
     frontInfoTag,
     ratingComponent,
     nutritionComponent,
-  }
+  },
+  emits: ['togglePublic'],
 }
 </script>
 
@@ -76,6 +89,16 @@ export default {
     #tag-box{
       align-self: stretch;
       margin: 0.2em 0;
+    }
+    #publicInfo{
+      margin: 0.2em 0;
+      align-self: flex-start;
+      font-family: '华文中宋';
+      .fa {
+        color: darkseagreen;
+        font-weight: bold;
+        font-size: 1.2em;
+      }
     }
   }
 

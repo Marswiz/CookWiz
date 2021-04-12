@@ -21,7 +21,6 @@ import {computed} from 'vue';
             res += props.ingredient[i].food;
             res += props.ingredient[i].weight;
             res += 'g';
-            res += `\xa0\xa0\xa0\xa0`;
             resArr.push(res);
           }
           return resArr;
@@ -51,7 +50,6 @@ h2 {
    word-break: break-all;
    font-family: '华文仿宋',Serif;
    color: #757475;
-   align-self: center;
  }
  #ingredient {
    padding: .1em 0;

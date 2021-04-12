@@ -27,29 +27,6 @@ async function getRecipeFromId(id,user){
     return res[0].toJSON();
 }
 
-// 按名称列表一次性从foodData class获取食物信息清单
-async function getFoodNutritionByName(...names){
-    let queryArr = [];
-    for (let i of names){
-        const queryFood = new AV.Query('foodData');
-        queryFood.equalTo('food', i);
-        queryArr.push(queryFood);
-    }
-    const query = AV.Query.or(...queryArr);
-    let res = await query.find();
-    if (res.length > 0){
-        return res.map( item => item.toJSON() );
-    } else {
-        return [{
-            food: 'default',
-            protein: 0,
-            fat: 0,
-            sugar: 0,
-            energy: 0,
-        }];
-    }
-}
-
 // 上传菜谱函数
 function uploadRecipe(recipe,user){
     const Recipe = AV.Object.extend(user+'_Recipes');
@@ -69,8 +46,7 @@ function uploadRecipe(recipe,user){
 }
 
 // 用户公开菜谱函数方法
-function publicUsersRecipe(user,recipe){
-    recipe.user = user;
+function publicUsersRecipe(user, recipe){
     const Recipe = AV.Object.extend('publicRecipes');
     const recipeUpload = new Recipe();
     for (let key of Object.keys(recipe)){
@@ -80,14 +56,47 @@ function publicUsersRecipe(user,recipe){
             recipeUpload.set(key, recipe[key]);
         }
     }
-    recipeUpload.save().then
+    recipeUpload.set('owner', user);
+    recipeUpload.save().then(()=>{
+        // 将本菜单本菜谱的isPublic变更为true。
+        const queryRecipes = new AV.Query(user+'_Recipes');
+        queryRecipes.equalTo('chName', recipe.chName);
+        queryRecipes.find().then((res)=>{
+            res[0].set('isPublic', true);
+            res[0].save();
+        });
+    }, error=>{
+        console.warn(error);
+    });
+}
+
+function privateUsersRecipe(user, recipe){
+    const queryPublicRecipe = new AV.Query('publicRecipes');
+    queryPublicRecipe.equalTo('chName', recipe.chName);
+    queryPublicRecipe.find().then((res)=>{
+        if (res[0]) {
+            res[0].destroy().then(()=>{
+                // 将本菜单本菜谱的isPublic变更为false。
+                const queryRecipes = new AV.Query(user+'_Recipes');
+                queryRecipes.equalTo('chName', recipe.chName);
+                queryRecipes.find().then((res)=>{
+                    res[0].set('isPublic', false);
+                    res[0].save();
+                });
+            });
+        } else {
+            alert('内部错误！无此共享菜谱。');
+        }
+    }, err => {
+        console.warn(err);
+    });
 }
 
 export {
     getAllRecipes,
     getRecipeFromName,
     getRecipeFromId,
-    getFoodNutritionByName,
     uploadRecipe,
     publicUsersRecipe,
+    privateUsersRecipe,
 };

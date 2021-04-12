@@ -142,7 +142,6 @@ export default {
   #userInfo {
     display: flex;
     flex-direction: column;
-    //justify-content: center;
   }
 
 }
