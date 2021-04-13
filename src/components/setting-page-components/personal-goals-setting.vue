@@ -60,6 +60,7 @@ export default {
     grid-template-columns: 1fr;
     gap: .5em;
     .label {
+      font-family: '华文中宋';
       font-weight: bold;
       text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
     }

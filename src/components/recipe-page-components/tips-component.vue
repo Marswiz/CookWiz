@@ -1,5 +1,5 @@
 <template>
-  <div style="display: flex;flex-direction: column;align-items: center;">
+  <div style="display: flex;flex-direction: column;align-items: center;width: 100%;">
     <h2>Tips</h2>
     <div id="tips">
       <p v-for="(item,index) in tips" :key="index" id="tip">
