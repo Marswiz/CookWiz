@@ -7,8 +7,9 @@
       <router-link to="/">Main Menu</router-link>
       <router-link v-if="userInfo.logStatus" to="/add-recipe">Add Recipe </router-link>
       <router-link v-if="!userInfo.logStatus" to="/login"><i class="fa fa-key"></i> Login</router-link>
+      <router-link v-if="userInfo.logStatus" to="/setting"><i class="fa fa-cog"></i> Setting</router-link>
 <!--  logged in user info   -->
-      <a v-else id="userInfo">
+      <a v-if="userInfo.logStatus" id="userInfo">
         <span style="text-decoration: underline"><i class="fa fa-user-o"></i>&nbsp; {{userInfo.user}} &nbsp;</span>
         <p @click="userLogout">Log Out</p>
       </a>

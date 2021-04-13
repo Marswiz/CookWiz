@@ -6,6 +6,7 @@ import recipePage from './components/recipe-page.vue';
 import addRecipePage from './components/add-recipe-page.vue';
 import loginPage from './components/login-page.vue';
 import registerPage from './components/register-page.vue';
+import settingPage from './components/setting-page.vue';
 import './assets/fonts/font.css';
 
 let routes = [
@@ -29,6 +30,10 @@ let routes = [
         path: '/register',
         component: registerPage,
     },
+    {
+        path: '/setting',
+        component: settingPage,
+    }
 ];
 
 // Create Vue-Router instance.

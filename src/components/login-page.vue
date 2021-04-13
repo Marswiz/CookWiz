@@ -20,7 +20,7 @@
 <script>
 import validationComponent from '@/components/login-components/validation-component.vue';
 import {ref,reactive,inject} from 'vue';
-import {login} from "@/js/leancloudInit.js";
+import { login } from "@/js/leancloudInit.js";
 import { useRouter } from 'vue-router';
 
 export default {
