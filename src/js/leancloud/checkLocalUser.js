@@ -1,15 +1,12 @@
 import * as AV from "leancloud-storage";
 
+function getLocalUser(){
+    const currentUser = AV.User.current();
+    return currentUser;
+}
 
-// initialize app.
-AV.init({
-    appId: "1cIxhO0Vf6jLVLLKXPWdwTOK-MdYXbMMI",
-    appKey: "Pn8EFfvyMY8TrmMwBBMf24Cr",
-});
-
-const currentUser = AV.User.current();
-
-function getLocalUser() {
+function getLocalUserName() {
+    const currentUser = AV.User.current();
     if (currentUser) {
         return {
             user: currentUser.getUsername(),
@@ -23,5 +20,6 @@ function getLocalUser() {
     }
 }
 export {
+    getLocalUserName,
     getLocalUser,
 };

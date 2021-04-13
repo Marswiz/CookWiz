@@ -37,7 +37,7 @@ export default {
       caloriesGoal: 0,
     });
 
-    const caledCalories = computed(()=>((goals.proteinGoal + goals.carbohydrateGoal) * 16.74 + goals.fatGoal * 37.67).toFixed(2));
+    const caledCalories = computed(()=>((+goals.proteinGoal + +goals.carbohydrateGoal) * 16.74 + +goals.fatGoal * 37.67).toFixed(2));
 
     function saveGoals(){
       goals.caloriesGoal = (goals.proteinGoal + goals.carbohydrateGoal) * 16.74 + goals.fatGoal * 37.67;
@@ -61,7 +61,7 @@ export default {
     gap: .5em;
     .label {
       font-family: '华文中宋';
-      font-weight: bold;
+      color: black;
       text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
     }
     .item {
@@ -82,11 +82,11 @@ export default {
         height: 2em;
         margin: 1em 0;
         border: none;
-        background-color: gray;
+        background-color: black;
         color: white;
         border-radius: 4px;
         &:active {
-          background-color: black;
+          background-color: gray;
         }
       }
     }

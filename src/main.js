@@ -7,13 +7,13 @@ import addRecipePage from './components/add-recipe-page.vue';
 import loginPage from './components/login-page.vue';
 import registerPage from './components/register-page.vue';
 import settingPage from './components/setting-page.vue';
+import verifyPage from './components/verify-page.vue';
 import './assets/fonts/font.css';
 
 let routes = [
     {
         path: '/',
-        component: mainPage,
-    },
+        component: mainPage,    },
     {
         path: '/recipe/:id',
         component: recipePage,
@@ -33,7 +33,11 @@ let routes = [
     {
         path: '/setting',
         component: settingPage,
-    }
+    },
+    {
+        path: '/verify',
+        component: verifyPage,
+    },
 ];
 
 // Create Vue-Router instance.

@@ -21,7 +21,7 @@
 <script>
 import {ref,reactive,onBeforeMount,provide} from 'vue';
 import { useRouter } from 'vue-router';
-import { getLocalUser, logout} from "@/js/leancloudInit.js";
+import { getLocalUserName, logout} from "@/js/leancloudInit.js";
 
 export default {
   name: 'App',
@@ -29,7 +29,7 @@ export default {
     const router = useRouter();
 
     // 本地获取用户登录信息
-    let user = getLocalUser();
+    let user = getLocalUserName();
     const userInfo = reactive(user);
 
     // 为子组件提供userInfo对象

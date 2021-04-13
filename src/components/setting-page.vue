@@ -15,7 +15,7 @@
         Security Settings
       </template>
       <template #settingComponent>
-        <div id="security" style="border: 1px solid tomato; height: 100px;">Security Setting to be coden</div>
+        <security-info-component></security-info-component>
       </template>
     </setting-page-component>
   </div>
@@ -23,12 +23,15 @@
 
 <script>
 import settingPageComponent from '@/components/setting-page-components/setting-items.vue';
-import personalGoalsSetting from '@/components/setting-page-components/personal-goals-setting.vue'
+import personalGoalsSetting from '@/components/setting-page-components/personal-goals-setting.vue';
+import securityInfoComponent from '@/components/setting-page-components/security-info.vue';
+
 export default {
   name: "config-page",
   components: {
     settingPageComponent,
     personalGoalsSetting,
+    securityInfoComponent,
   },
 }
 </script>
@@ -40,7 +43,6 @@ export default {
     box-sizing: border-box;
     padding: 0 2em;
     width: 100vw;
-    border: 1px solid tomato;
     #header {
       font-family: "Courier New";
       font-weight: bold;

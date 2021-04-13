@@ -1,8 +1,8 @@
 <template>
   <div class="settingItem">
-    <div id="header" @click="shown = !shown">
+    <div id="header" @click="shown = !shown" :class="{selected: shown}">
       <slot name="headerText">Default Setting</slot>
-      <span id="label" :class="{rotated: shown}">> </span>
+      <span id="label" :class="{rotated: shown}"> > </span>
     </div>
     <div id="setting" v-if="shown">
       <slot name="settingComponent">Default Setting Component</slot>
@@ -27,7 +27,11 @@ export default {
   .settingItem{
     display: flex;
     flex-direction: column;
-    color: #757475;
+    color: #777;
+    .selected{
+      color: black;
+      text-shadow: 1px 1px 0 white, 2px 2px 0 lightgrey;
+    }
     #label {
       color: black;
       font-family: TodaySB-Caps;

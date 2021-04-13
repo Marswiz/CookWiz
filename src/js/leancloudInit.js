@@ -12,5 +12,5 @@ export {  getRecipeFromName,  getAllRecipes,  getRecipeFromId , uploadRecipe, pu
 export {  isUserExist,  login,  register,} from './leancloud/login_register.js'
 export {  getFoods, getFoodNutritionByName} from './leancloud/food.js';
 export {  logout} from './leancloud/logout.js';
-export {  getLocalUser,} from './leancloud/checkLocalUser.js';
+export {  getLocalUserName,getLocalUser,} from './leancloud/checkLocalUser.js';
 export {  changeUserGoals,} from './leancloud/setting.js';

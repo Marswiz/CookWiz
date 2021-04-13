@@ -47,6 +47,7 @@ export default {
   #recipeChName {
     margin: 0;
     font-family: '华文中宋';
+    color: #555;
   }
   #recipeEngName {
     margin: 0;
