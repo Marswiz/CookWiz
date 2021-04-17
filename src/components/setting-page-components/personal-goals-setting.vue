@@ -24,23 +24,23 @@
 
 <script>
 import {reactive, computed} from 'vue';
-import {changeUserGoals} from "@/js/leancloud/setting";
+import {getLocalUser, changeUserGoals} from "@/js/leancloudInit.js";
 import {_throttle} from "@/js/throttle";
 
 export default {
   name: "personal-goals",
   setup(){
     const goals = reactive({
-      proteinGoal: 0,
-      fatGoal: 0,
-      carbohydrateGoal: 0,
-      caloriesGoal: 0,
+      proteinGoal: getLocalUser().attributes.proteinGoal,
+      fatGoal: getLocalUser().attributes.fatGoal,
+      carbohydrateGoal: getLocalUser().attributes.carbohydrateGoal,
+      caloriesGoal: getLocalUser().attributes.caloriesGoal,
     });
 
     const caledCalories = computed(()=>((+goals.proteinGoal + +goals.carbohydrateGoal) * 16.74 + +goals.fatGoal * 37.67).toFixed(2));
 
     function saveGoals(){
-      goals.caloriesGoal = (goals.proteinGoal + goals.carbohydrateGoal) * 16.74 + goals.fatGoal * 37.67;
+      goals.caloriesGoal = ((+goals.proteinGoal + +goals.carbohydrateGoal) * 16.74 + +goals.fatGoal * 37.67).toFixed(2);
       changeUserGoals(goals);
     }
 

@@ -27,6 +27,14 @@ async function getRecipeFromId(id,user){
     return res[0].toJSON();
 }
 
+// 按objectId获取publish菜谱函数
+async function getPublicRecipeFromId(id){
+    const queryRecipes = new AV.Query('publicRecipes');
+    queryRecipes.equalTo('objectId', id);
+    let res = await queryRecipes.find();
+    return res[0].toJSON();
+}
+
 // 上传菜谱函数
 function uploadRecipe(recipe,user){
     const Recipe = AV.Object.extend(user+'_Recipes');
@@ -70,6 +78,7 @@ function publicUsersRecipe(user, recipe){
     });
 }
 
+// 将菜谱设为私有
 function privateUsersRecipe(user, recipe){
     const queryPublicRecipe = new AV.Query('publicRecipes');
     queryPublicRecipe.equalTo('chName', recipe.chName);
@@ -92,6 +101,15 @@ function privateUsersRecipe(user, recipe){
     });
 }
 
+// 获取公开的菜谱
+async function getPublicRecipes(num){
+    const queryPublicRecipe = new AV.Query('publicRecipes');
+    queryPublicRecipe.limit(num);
+    let res = await queryPublicRecipe.find();
+    return res;
+}
+
+
 export {
     getAllRecipes,
     getRecipeFromName,
@@ -99,4 +117,6 @@ export {
     uploadRecipe,
     publicUsersRecipe,
     privateUsersRecipe,
+    getPublicRecipes,
+    getPublicRecipeFromId,
 };

@@ -5,6 +5,7 @@
     </div>
     <div id="navContent" v-if="navShown" @mouseleave="hideNavbar" @click="hideNavbar">
       <router-link to="/">Main Menu</router-link>
+      <router-link to="/public"><i class="fa fa-eye"></i> Find Recipes</router-link>
       <router-link v-if="userInfo.logStatus" to="/add-recipe">Add Recipe </router-link>
       <router-link v-if="!userInfo.logStatus" to="/login"><i class="fa fa-key"></i> Login</router-link>
       <router-link v-if="userInfo.logStatus" to="/setting"><i class="fa fa-cog"></i> Setting</router-link>

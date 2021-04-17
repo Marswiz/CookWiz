@@ -5,7 +5,7 @@
       <span style="font-weight: bold;">+86&nbsp;&nbsp;</span><input type="tel" id="mobile" v-model="mobileInput">
     </div>
     <button id="verifyMobile" @click="verifyMobile">Verify</button>
-    <div id="messageBox" v-for="(message,index) in messages" :key="index">{{message}}</div>
+    <div id="messageBox" :class="{success: message.type=='success'}" v-for="(message,index) in messages" :key="index">{{message.content}}</div>
   </div>
 </template>
 
@@ -26,18 +26,25 @@ export default {
       if (verifyFormat) {
         if (mobileInput.value === getLocalUser().getMobilePhoneNumber()){
           messages.clear();
-          messages.add('Your Mobile Phone Number has not changed.');
+          messages.add('<span style="color: green;">Your Mobile Phone Number has not changed.</span>');
           return ;
         }
         messages.clear();
         const localUser = getLocalUser();
         localUser.set('mobilePhoneNumber','+86'+mobileInput.value);
-        localUser.save().then((res)=>{
-          console.log(res);
+        localUser.save().then(()=>{
+          messages.clear();
+          messages.add({
+            type: 'success',
+            content: 'Message has been sent to your mobile, check please.',
+          });
         });
       } else {
         messages.clear();
-        messages.add('Check Your Mobile Phone Number Format Please.');
+        messages.add({
+          content: 'Check Your Mobile Phone Number Format Please.',
+          type: 'error',
+        });
       }
     }
     return {
@@ -79,6 +86,9 @@ export default {
   }
   #messageBox {
     padding: 1em 0;
+  }
+  .success {
+    color: darkseagreen;
   }
 }
 
