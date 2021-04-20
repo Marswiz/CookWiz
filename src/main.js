@@ -57,5 +57,6 @@ let router = createRouter({
 });
 
 let app = createApp(App);
+
 app.use(router);
 app.mount('#app');
