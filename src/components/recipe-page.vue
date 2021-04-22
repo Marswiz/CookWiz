@@ -16,7 +16,7 @@ import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
 import feedbackComponent from './recipe-page-components/feedback-component.vue';
 import {useRoute} from 'vue-router';
-import {getRecipeFromId,getFoodNutritionByName} from "@/js/leancloudInit";
+import {getRecipeFromId,getFoodNutritionListByNames} from "@/js/leancloudInit";
 
 export default {
   name: "recipe-page",
@@ -53,8 +53,10 @@ export default {
       for (let i of res.ingredient){
         foodList.push(i.food);
       }
-      getFoodNutritionByName(...foodList).then((foodList)=>{
+      getFoodNutritionListByNames(...foodList).then((foodList)=>{
         res.ingredient.forEach((i)=>{
+          // 赋值实际的用量weight给对应食材
+          // provide the weight value to specific food.
           for (let j of foodList){
             if (i.food === j.food){
               j.weight = i.weight;
@@ -69,6 +71,7 @@ export default {
       recipe['isPublic'] = !recipe['isPublic'];
     }
 
+    // Provide foods info for child component calculate nutrition infos.
     provide('foods',foods);
     return {
       recipe,

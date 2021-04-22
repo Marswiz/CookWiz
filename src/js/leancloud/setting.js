@@ -7,8 +7,7 @@ function changeUserGoals(goalsObj){
     currentUser.set(i, +goalsObj[i]);
   }
   currentUser.save().then((res)=>{
-    console.log('设置成功！');
-    console.log(res);
+    alert(`${res.attributes.username} goals set Succeed!`);
     return true;
   }).catch(err=>{
     console.warn(err);

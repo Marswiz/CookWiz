@@ -2,33 +2,33 @@
   <div id="addRecipePageBox">
     <typing-effect-component style="align-self: flex-end;" :id="'addRecipeHeader'">Edit & Upload Your Own Recipe..</typing-effect-component>
       <div id="item">
-       <label for="chName">中文名：</label><input type="text" id="chName" v-model="recipe.chName">
+       <label for="chName">中文名ChName：</label><input type="text" id="chName" v-model="recipe.chName">
       </div>
       <div id="item">
-        <label for="engName">英文名：</label><input type="text" id="engName" v-model="recipe.engName">
+        <label for="engName">英文名EngName：</label><input type="text" id="engName" v-model="recipe.engName">
       </div>
       <div id="item">
-        <label for="time">制作时长(min)：</label><input type="number" id="time" v-model="recipe.time">
+        <label for="time">制作时长Time(min)：</label><input type="number" id="time" v-model="recipe.time">
       </div>
       <div id="item">
-        <label for="category">类别：</label>
+        <label for="category">类别Category：</label>
         <select style="border: 2px solid black;" name="category" id="category" v-model="recipe.category" @change="showChange()">
-          <option value="MC">主菜</option>
-          <option value="AP">开胃菜</option>
-          <option value="DR">饮品</option>
-          <option value="DE">甜品</option>
-          <option value="SD">配菜</option>
-          <option value="BS">基础</option>
+          <option value="MC">主菜 MainCourse</option>
+          <option value="AP">开胃菜 Appetizer</option>
+          <option value="DR">饮品 Drink</option>
+          <option value="DE">甜品 Desserts</option>
+          <option value="SD">配菜 SideDish</option>
+          <option value="BS">基础 Basic</option>
         </select>
       </div>
       <div id="item">
-        <label for="serve">人份数：</label><input type="number" id="serve" v-model="recipe.serve">
+        <label for="serve">人份数Serves：</label><input type="number" id="serve" v-model="recipe.serve">
       </div>
       <div id="item">
-        <label for="tags">标签：</label><input type="text" id="tags" v-model="tagsInput" @change="recipe.tag = tags">
+        <label for="tags">标签Tags：</label><input type="text" id="tags" v-model="tagsInput" @change="recipe.tag = tags">
       </div>
       <div id="item">
-        <label for="rating">评分：</label>
+        <label for="rating">评分Rating：</label>
         <div>
           <input style="display: inline-block;width: 80%;" type="range" min="0" max="5" id="rating" v-model="recipe.rating">
           <span style="display:inline-block;width: 15%;text-align: center;">{{recipe.rating}}</span>
@@ -36,17 +36,17 @@
       </div>
 <!-- 配料设置 -->
       <div id="item">
-        <label>配料：</label>
+        <label>配料Ingredients：</label>
         <add-recipe-ingredient-component @loadIngredient="loadIngredient" @loadSpecialIngredient="loadSpecialIngredient"></add-recipe-ingredient-component>
       </div>
 <!--  制作流程      -->
       <div id="item">
-        <label>流程：</label>
+        <label>流程Process：</label>
         <add-recipe-process-tip-component :type="'process'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
 <!--   技巧提示     -->
       <div id="item">
-        <label>技巧提示：</label>
+        <label>技巧提示Tips：</label>
         <add-recipe-process-tip-component :type="'tips'" @loadItems="loadItems"></add-recipe-process-tip-component>
       </div>
       <button id="submit" @click="upload">Submit</button>
@@ -153,7 +153,6 @@ export default {
     grid-template-columns: 0.4fr 1fr;
     gap: 1em;
     margin: 0.8em 1em 0 1em;
-    //border: 2px solid black;
     input {
       display: block;
       border: 2px solid black;
@@ -167,7 +166,7 @@ export default {
     label{
       display: block;
       font-weight: bold;
-      text-align: right;
+      //text-align: right;
       font-family: '华文中宋','TodaySB-Caps',sans-serif;
     }
   }
@@ -177,13 +176,13 @@ export default {
     align-self: center;
     width: 92vw;
     font-weight: bold;
+    font-size: 1em;
     background-color: black;
     font-family: 'Courier New';
     padding: 0 2em;
-    height: 10vw;
+    height: 2em;
     margin: 2.5em 0;
     color: white;
-    font-weight: bold;
     &:active{
       background-color: #a1a1a1;
       text-decoration: underline;

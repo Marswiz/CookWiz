@@ -1,8 +1,25 @@
+// function for dealing with local login User info.
 import * as AV from "leancloud-storage";
 
 function getLocalUser(){
     const currentUser = AV.User.current();
     return currentUser;
+}
+
+function getLocalUserNutritionGoals(){
+    const currentUser = AV.User.current();
+    const {
+        caloriesGoal,
+        carbohydrateGoal,
+        fatGoal,
+        proteinGoal,
+    } = currentUser.attributes;
+    return {
+        caloriesGoal,
+        carbohydrateGoal,
+        fatGoal,
+        proteinGoal,
+    };
 }
 
 function getLocalUserName() {
@@ -22,4 +39,5 @@ function getLocalUserName() {
 export {
     getLocalUserName,
     getLocalUser,
+    getLocalUserNutritionGoals,
 };

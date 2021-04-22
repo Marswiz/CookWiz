@@ -18,7 +18,7 @@ async function getFoods(){
 }
 
 // 按名称列表一次性从foodData class获取食物信息清单
-async function getFoodNutritionByName(...names){
+async function getFoodNutritionListByNames(...names){
     let queryArr = [];
     for (let i of names){
         const queryFood = new AV.Query('foodData');
@@ -42,5 +42,5 @@ async function getFoodNutritionByName(...names){
 
 export {
     getFoods,
-    getFoodNutritionByName,
+    getFoodNutritionListByNames,
 };

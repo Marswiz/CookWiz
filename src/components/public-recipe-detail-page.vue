@@ -16,7 +16,7 @@ import processComponent from './recipe-page-components/process-component.vue';
 import tipsComponent from './recipe-page-components/tips-component.vue';
 import feedbackComponent from './recipe-page-components/feedback-component.vue';
 import {useRoute} from 'vue-router';
-import {getPublicRecipeFromId,getFoodNutritionByName} from "@/js/leancloudInit";
+import {getPublicRecipeFromId,getFoodNutritionListByNames} from "@/js/leancloudInit";
 
 export default {
   name: "recipe-page",
@@ -53,7 +53,7 @@ export default {
       for (let i of res.ingredient){
         foodList.push(i.food);
       }
-      getFoodNutritionByName(...foodList).then((foodList)=>{
+      getFoodNutritionListByNames(...foodList).then((foodList)=>{
         res.ingredient.forEach((i)=>{
           for (let j of foodList){
             if (i.food === j.food){

@@ -100,7 +100,7 @@ export default {
 
 <style scoped>
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 800px) {
 
   #header {
     padding: 1em 0;

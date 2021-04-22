@@ -107,6 +107,7 @@ export default {
   }
   #btnBox{
     display: flex;
+    justify-content: flex-end;
     button {
       border: none;
       margin-right: 1em;
@@ -115,7 +116,7 @@ export default {
       border-radius: .5em;
       font-family: 'Courier New';
       padding: 0 1em;
-      height: 8vw;
+      height: 2em;
       color: white;
       font-weight: bold;
       &:active{

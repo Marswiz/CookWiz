@@ -7,7 +7,7 @@
     <div id="itemsBox" @change="$emit('loadItems',{type:type ,content:itemsRes})">
       <div id="item" v-for="(item,index) in items" :key="index">
         <label :for="index">{{index+1}}. </label>
-        <textarea :id="type+index" v-model="items[index]"></textarea>
+        <textarea :id="type+index" v-model="items[index]" :placeholder="placeholder"></textarea>
       </div>
     </div>
   </div>
@@ -17,7 +17,8 @@
   export default {
     data(){
       return {
-        items: ['Please input your '+this.type+'...'],
+        items: [''],
+        placeholder: 'Input ' + this.type + ' here..',
       };
     },
     props: {
@@ -55,6 +56,7 @@
 <style scoped lang="scss">
   #btnBox{
     display: flex;
+    justify-content: flex-end;
     align-items: center;
   }
   button {
@@ -65,7 +67,7 @@
     border-radius: .5em;
     font-family: 'Courier New';
     padding: 0 1em;
-    height: 8vw;
+    height: 2em;
     color: white;
     font-weight: bold;
     &:active{
